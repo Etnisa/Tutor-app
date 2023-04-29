@@ -5,7 +5,14 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-    return render_template('index.html')
+    announcements = requests.get('https://chatty-bulldog-76.telebit.io/announcements').json()
+    print(announcements[0])
+    return render_template('index.html', announcements=announcements)
+
+@app.route('/test')
+def test(): 
+    return render_template('test.html')
+
 
 @app.route('/announcements', methods=["GET"])
 def announcements():
