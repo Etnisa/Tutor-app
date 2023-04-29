@@ -3,6 +3,13 @@ import requests
 
 app = Flask(__name__)
 
+def forward_response(r):
+    cookies = r.cookies.get_dict()
+    resp = make_response(jsonify(r.json()),r.status_code)
+    for c in cookies:
+        resp.set_cookie(c, cookies[c])
+    return resp
+
 @app.route('/')
 def main():
     announcements = requests.get('https://chatty-bulldog-76.telebit.io/announcements').json()
@@ -24,11 +31,10 @@ def login():
     r = requests.post(
         'https://chatty-bulldog-76.telebit.io/login',
         headers={'Content-Type': 'application/json'},
-        cookies=request.cookies,
-        json={'user': 't1',
+        json={'user': 't2',
               'password': 't1'}                  
     )
-    return r.json()
+    return forward_response(r)
 
 
 @app.route('/my_account', methods=["GET"])
