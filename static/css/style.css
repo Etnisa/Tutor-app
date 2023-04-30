@@ -1,0 +1,26 @@
+/* .btn {
+    border-color: white;
+    color: white;
+}
+
+.btn:hover {
+    border-color: var(--bs-body-color);
+    color: var(--bs-body-color);
+} */
+
+.pole_szukania {
+    width: 115%;
+}
+
+.zaloguj {
+    padding-right: 3%;
+}
+
+.nav-item {
+    font-weight: bold;
+}
+
+.przycisk:hover {
+    background-color: primary;
+    color: white;
+}

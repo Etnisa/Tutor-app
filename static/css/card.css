@@ -1,0 +1,19 @@
+.card-body,
+.card {
+    margin: 0;
+    padding: 0;
+}
+
+.card {
+    margin: .8rem;
+}
+
+.card-body {}
+
+.card-title {
+    font-size: larger;
+}
+
+.top_div {
+    width: 100%;
+}
