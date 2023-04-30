@@ -13,7 +13,10 @@ def forward_response(r):
 @app.route('/')
 def main():
     announcements = requests.get('https://chatty-bulldog-76.telebit.io/announcements').json()
-    print(announcements[0])
+    for a in announcements:
+        a['short_title']=a['title']
+        if len(a['title']) > 40:
+            a['short_title']=a['title'][:40]+'...'   
     return render_template('index.html', announcements=announcements)
 
 @app.route('/test')
@@ -42,7 +45,6 @@ def my_account():
     r = requests.get('https://chatty-bulldog-76.telebit.io/my_account', cookies=request.cookies)
     return r.json()
     
-
     
 if __name__ == '__main__':
     app.run(debug=True)
