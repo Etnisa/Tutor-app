@@ -5,15 +5,71 @@
 }
 
 .card {
-    margin: .8rem;
+    width: 15rem;
+    height: 20rem;
+    margin: 1.5rem;
+    border: 1px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 0%;
+    background-color: white;
 }
 
 .card-body {}
 
-.card-title {
-    font-size: larger;
+.card-title {}
+
+.bottom_div {
+    width: 100%;
+    height: 40%;
+    /* background-color: rgb(57, 149, 255); */
+    /*tu był yellow  */
+}
+
+.list-group,
+.list-group-flush {
+    margin: 0;
+    padding: 0;
+}
+
+.list-group-item {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(195, 195, 195);
+    background-color: black;
 }
 
 .top_div {
+    /* background-color: rgb(255, 163, 26); */
     width: 100%;
+    height: 60%;
+    border-bottom: 2px;
+    border-bottom: black;
+    border-bottom: solid;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.left-side {
+    width: 50%;
+    height: 100%;
+    margin: 1rem;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-side {
+    width: 50%;
+    height: 100%;
+    /* background-color: yellow; */
+    display: flex;
+    align-items: center;
 }
