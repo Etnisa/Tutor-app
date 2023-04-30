@@ -17,8 +17,8 @@ def init_routes(app):
         
         for a in announcements:
             a["short_title"] = a["title"]
-            if len(a["title"]) > 25:
-                a["short_title"] = a["title"][:25] + "..."
+            if len(a["title"]) > 70 :
+                a["short_title"] = a["title"][:70] + "..."
                 
         print("Zwrócone rekordy spełniające kryterium "+filter+" "+str(len(announcements)))
                 

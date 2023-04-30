@@ -29,7 +29,9 @@
         <div class="zaloguj">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Zaloguj się</a>
+                    <a class="nav-link" href="#">
+                        Zaloguj się
+                    </a>
                 </li>
             </ul>
         </div>
@@ -39,33 +41,45 @@
 
 
     <div class="container-fluid text-center">
-        <div class="row justify-content-md-center">
+        <div class="row justify-content-center">
             {% for a in announcements %}
-            <div class="card col-3">
 
-                <div class="top_div">
-                    <div class="left-side">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/5.webp" class="rounded-3" style="width: 120px;" alt="Avatar" />
-                        <p class="card-text">{{a['announcer_name']}} {{a['announcer_surname']}}</p>
+            <div class="card testimonial-card">
+                <a href="https://chatty-bulldog-76.telebit.io/announcements/{{a['id']}}">
+                    <div class="card-up" style="background-color: #9d789b;">
 
-                    </div>
-                    <div class="right-side">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Kierunek: {{a['degree_course']}}</li>
-                            <li class="list-group-item">Semestr: {{a['semester']}}</li>
-                        </ul>
 
                     </div>
 
+                    <div class="avatar mx-auto bg-white">
+                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/4.webp" class="rounded" alt="Avatar" />
+                    </div>
 
-                </div>
+                    <div class="card-body ">
+                        <h4 class="mb-0">
+                            {{a['announcer_name']}} {{a['announcer_surname']}}
 
-                <div class="bottom_div">
-                    <h5 class="card-title">{{a['short_title']}}</h5>
-                    <p class="card-text">{{a['price']}} zł/h {% if a['is_negotiable'] %} do negocjacji {% endif %}
-                    </p>
-                </div>
+                        </h4>
+                        <p> {{a['degree_course']|capitalize}} semestr {{a['semester']}}</p>
+                        <hr />
+
+                        <div class="kontener-napis pt-0">
+                            <i>{{a['short_title']}}</i>
+                        </div>
+
+                        <div class="mt-2 card-bottom text-body-secondary">
+                            <p class="card-text">
+                                {{a['price']}} zł/h {% if a['is_negotiable'] %} </br>do negocjacji
+                            </p>
+                            <i class="mt-2">Dodano: {{a['date_posted']}} </i> {% else %}
+                            <i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDodano: {{a['date_posted']}} </i> {% endif %}
+                        </div>
+
+                    </div>
+                </a>
             </div>
+
+
             {% endfor %}
         </div>
     </div>

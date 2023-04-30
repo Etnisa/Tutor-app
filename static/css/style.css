@@ -8,6 +8,14 @@
     color: var(--bs-body-color);
 } */
 
+.card a {
+    all: unset;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    display: contents;
+}
+
 .pole_szukania {
     width: 110%;
 }
@@ -22,5 +30,15 @@
 
 .przycisk:hover {
     background-color: primary;
+    color: white;
+}
+
+.kontener-napis {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zaloguj ul li a {
     color: white;
 }
