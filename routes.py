@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request,jsonify
 import requests
 from helpers import forward_response, get_annocements, filter_annoucements
 
@@ -27,6 +27,12 @@ def init_routes(app):
     @app.route("/announcements", methods=["GET"])
     def announcements():
         return get_annocements()
+    
+    
+    @app.route("/announcement/<int:id>", methods=["GET"])
+    def announcement(id):
+        annoucement = requests.get(f"https://chatty-bulldog-76.telebit.io/announcements/{id}").json()
+        return jsonify(render_template("annoucement.html", annoucement=annoucement))
 
     @app.route("/login", methods=["POST"])
     def login():

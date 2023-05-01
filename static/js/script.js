@@ -42,10 +42,3 @@ function fetch_announcements() {
         .then(data => console.log(data))
         .catch(error => console.log(error))
 }
-
-
-document.getElementById('search').addEventListener('click', search)
-
-function search() {
-    console.log("test")
-}

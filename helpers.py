@@ -14,6 +14,7 @@ def get_annocements():
     return requests.get("https://chatty-bulldog-76.telebit.io/announcements").json()
 
 
+
 def filter_annoucements(search_for: str):
     annocements = get_annocements()
     filtered = []
