@@ -16,7 +16,7 @@
 <body>
     <nav class="navbar navbar-fluid navbar-light menu" style="background-color:#3995ff">
         <a class="navbar-brand" href="#"></a>
-        <form action="/" , method="post">
+        <form action="/1" , method="post">
             <div class="row">
                 <div class="col-8">
                     <input class="form-control pole_szukania" name="filter" type="search" placeholder="Szukaj" aria-label="Search">
@@ -88,6 +88,22 @@
 
     <!-- enlarged annoucement -->
     <div class="w-95" id="annoucement"></div>
+
+
+    <!-- pagination -->
+    <div class="container-fluid d-flex justify-content-center">
+
+        <nav>
+            <ul class="pagination">
+                {% for p in range(pages) %} {% if page==p+1 %}
+                <li class="page-item active"><a class="page-link" href="/{{p+1}}">{{p+1}}</a></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="/{{p+1}}">{{p+1}}</a></li>
+                {% endif %} {% endfor %}
+            </ul>
+        </nav>
+
+    </div>
 
 
 

@@ -15,10 +15,13 @@ def get_annocements():
 
 
 
-def filter_annoucements(search_for: str):
+def filter_annoucements(search_for):
+    search_for = search_for.lower()
     annocements = get_annocements()
     filtered = []
     for a in annocements:
-        if str(a.values()).find(search_for) >= 0:
+        values = str(a.values())
+        values = values.lower()
+        if values.find(search_for) >= 0:
             filtered.append(a)
     return filtered
