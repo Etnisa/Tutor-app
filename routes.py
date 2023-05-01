@@ -1,6 +1,7 @@
 from flask import render_template, request,jsonify
 import requests
 from helpers import forward_response, get_annocements, filter_annoucements
+from constants import *
 
 
 def init_routes(app):
@@ -17,8 +18,8 @@ def init_routes(app):
         
         for a in announcements:
             a["short_title"] = a["title"]
-            if len(a["title"]) > 70 :
-                a["short_title"] = a["title"][:70] + "..."
+            if len(a["title"]) > MAX_TITLE_LEN :
+                a["short_title"] = a["title"][:MAX_TITLE_LEN] + "..."
                 
         print("Zwrócone rekordy spełniające kryterium "+filter+" "+str(len(announcements)))
                 
@@ -30,9 +31,12 @@ def init_routes(app):
     
     
     @app.route("/announcement/<int:id>", methods=["GET"])
-    def announcement(id):
+    def announcement(id):  
         annoucement = requests.get(f"https://chatty-bulldog-76.telebit.io/announcements/{id}").json()
-        return jsonify(render_template("annoucement.html", annoucement=annoucement))
+        annoucement = annoucement[0]
+        response = jsonify(render_template("annoucement.html", a=annoucement))
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
 
     @app.route("/login", methods=["POST"])
     def login():

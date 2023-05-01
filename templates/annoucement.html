@@ -1,1 +1,83 @@
-<p>Szczegóły ogłoszenia</p>
+<div class="modal-xl modal position-fixed" id="enlarged" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Szczegóły</h5>
+                <button type="button" class="btn-close" id="enlarged-close" aria-label="Close"></button>
+                <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="left-side-enlarged">
+                    <div class="date-item-line">
+                        <span>Data dodania: {{a['date_posted']}}  </span>
+                        <span>Przedmiot: {{a['subject']}}  </span>
+
+
+                    </div>
+                    <div class="title-line">
+                        <span>{{a['title']}}</span>
+
+
+                    </div>
+                    <div class="price-line">
+                        <p class="card-text">
+                            {{a['price']}} zł/h {% if a['is_negotiable'] %} </br>do negocjacji
+                        </p> {% endif %}
+
+
+                    </div>
+                    <div class="content-line">
+                        <span>{{a['content']}}</span>
+
+
+                    </div>
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="right-side-enlarged">
+                    <div class="myavatar-div">
+                        <div class="avatar mx-auto bg-white">
+                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/4.webp" class="img-thumbnail" alt="Avatar" />
+                        </div>
+
+                    </div>
+                    <div class="name_surname "><span>{{a['announcer_name']|capitalize}}&nbsp{{a['announcer_surname']}}</span></div>
+                    <div class="degree_of_studies "><span>Kierunek:&nbsp{{a['degree_course']}}</span></div>
+                    <div class="semester_h "><span>Semestr:&nbsp{{a['semester']}}</span></div>
+
+                    {% if a['announcer_phone'] != None%}
+                    <div class="number_p ">tel:&nbsp<span>{{a['announcer_phone']}}</span></div>
+                    {% endif %}
+
+
+                    <div class="e-mail_ik "><span>{{a['announcer_email']}}</span></div>
+
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
