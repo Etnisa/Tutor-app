@@ -1,0 +1,63 @@
+<div class="modal-lg modal position-fixed" id="register" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Rejestracja</h5>
+                <button type="button" class="btn-close" id="register-close" aria-label="Close"></button>
+                <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body login_screen">
+
+
+                <form action="/register" , method="post">
+                    <div class="container-flex row">
+                        <!-- Imie  -->
+                        <div class="form-outline mb-4 col-sm ">
+                            <input type="text" class="form-control" placeholder="Imię" name="name" />
+                        </div>
+                        <!-- Nazwisko  -->
+                        <div class="form-outline mb-4 col-sm ">
+                            <input type="text" class="form-control" placeholder="Nazwisko" name="surname" />
+                        </div>
+                    </div>
+
+                    <!-- Nazwa użytkownika  -->
+                    <div class="form-outline mb-4">
+                        <input type="text" class="form-control" placeholder="Nazwa użytkownika" name="username" /> </div>
+
+                    <!-- Numer telefonu  -->
+                    <div class="form-outline mb-4">
+                        <input type="tel" class="form-control" placeholder="Numer telefonu" name="phone" /> </div>
+
+                    <!-- Email  -->
+                    <div class="form-outline mb-4">
+                        <input type="email" class="form-control" placeholder="E-mail" name="email" /> </div>
+
+                    <!-- Hasło -->
+                    <div class="form-outline mb-2">
+                        <input type="password" class="form-control" placeholder="Hasło" name="password" />
+                    </div>
+
+
+
+                    <div class="container-flex row">
+                        <button type="submit" class="btn btn-primary btn-block mb-4 mt-2">Zarejestruj się</button>
+                        <div class="or-word">
+                            <p>lub</p>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-block mb-4" id="login-button2">Zaloguj się</button>
+
+                    </div>
+
+
+
+            </div>
+            </form>
+
+
+
+        </div>
+    </div>
+</div>
+</div>

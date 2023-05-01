@@ -14,14 +14,23 @@ def get_annocements():
     return requests.get("https://chatty-bulldog-76.telebit.io/announcements").json()
 
 
-
 def filter_annoucements(search_for):
     search_for = search_for.lower()
+    search_for = search_for.split()
     annocements = get_annocements()
+    if len(search_for) == 0:
+        return annocements
     filtered = []
     for a in annocements:
         values = str(a.values())
         values = values.lower()
-        if values.find(search_for) >= 0:
-            filtered.append(a)
+        
+        add = True
+        for s in search_for:
+            if values.find(s) < 0:
+                add= False
+        
+        if add: 
+            filtered.append(a) 
+            
     return filtered

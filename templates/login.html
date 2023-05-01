@@ -1,0 +1,48 @@
+<div class="modal-md modal position-fixed" id="login" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Logowanie</h5>
+                <button type="button" class="btn-close" id="login-close" aria-label="Close"></button>
+                <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body login_screen">
+
+
+                <form action="/login" method="post">
+                    <!-- Email  -->
+                    <div class="form-outline mb-4 mt-2">
+                        <input type="text" class="form-control" placeholder="E-mail lub nazwa użytkownika" name="username" />
+                    </div>
+
+                    <!-- Hasło -->
+                    <div class="form-outline mb-2">
+                        <input type="password" class="form-control" placeholder="Hasło" name="password" />
+                    </div>
+
+                    <div class="form-outline mb-2 alert alert-danger" id="login_alert">
+                        Błąd logowania!
+                    </div>
+
+                    <div class="container-flex row ">
+                        <button type="submit" class="btn btn-primary btn-block mb-4 mt-2">Zaloguj się</button> <br>
+                        <div class="or-word">
+                            <p>lub</p>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-block mb-4" id="register-button">Zarejestruj
+                            się</button>
+
+                    </div>
+
+
+
+            </div>
+            </form>
+
+
+
+        </div>
+    </div>
+</div>
+</div>

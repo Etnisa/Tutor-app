@@ -1,4 +1,4 @@
-from flask import render_template, request, jsonify, redirect
+from flask import render_template, request, jsonify, redirect, make_response
 import requests
 from helpers import forward_response, get_annocements, filter_annoucements
 from constants import *
@@ -15,13 +15,14 @@ def init_routes(app):
         return redirect("/1", code=302)
 
     @app.route("/<int:page>", methods=["GET", "POST"])
-    def page(page):
+    def page(page):        
         # filter annoucements
         filter = ""
         if "filter" in request.form.keys():
             filter = request.form["filter"]
+
         announcements = filter_annoucements(filter)
-        
+
         # calculate pages qty
         pages = math.ceil(len(announcements) / CARDS_PER_PAGE)
 
@@ -35,12 +36,18 @@ def init_routes(app):
             a["short_title"] = a["title"]
             if len(a["title"]) > MAX_TITLE_LEN:
                 a["short_title"] = a["title"][:MAX_TITLE_LEN] + "..."
-
-        return render_template("index.html", announcements=announcements, pages=pages, page=page)
+        
+        return render_template(
+            "index.html", announcements=announcements, pages=pages, page=page
+        )
 
     @app.route("/announcements", methods=["GET"])
     def announcements():
         return get_annocements()
+
+    @app.route("/account", methods=["GET", "POST"])
+    def account():
+        return render_template('account.html')
 
     @app.route("/announcement/<int:id>", methods=["GET"])
     def announcement(id):
@@ -52,14 +59,41 @@ def init_routes(app):
         response.headers.add("Access-Control-Allow-Origin", "*")
         return response
 
+    @app.route("/login_modal", methods=["GET"])
+    def login_modal():
+        response = jsonify(render_template("login.html"))
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response
+
+    @app.route("/register_modal", methods=["GET"])
+    def register_modal():
+        response = jsonify(render_template("register.html"))
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response
+    
     @app.route("/login", methods=["POST"])
     def login():
         r = requests.post(
             "https://chatty-bulldog-76.telebit.io/login",
             headers={"Content-Type": "application/json"},
-            json={"user": "t2", "password": "t1"},
+            json={
+                "user": request.form['username'],
+                "password": request.form['password']
+                }
         )
-        return forward_response(r)
+        
+        # login success
+        resp = make_response(redirect('/',302))
+        if r.status_code == 200:
+
+            cookies = r.cookies.get_dict()
+            for c in cookies:
+                resp.set_cookie(c, cookies[c])
+        # login error
+        else:
+            resp.set_cookie('login_err', '1')
+        return resp
+            
 
     @app.route("/my_account", methods=["GET"])
     def my_account():
@@ -67,3 +101,20 @@ def init_routes(app):
             "https://chatty-bulldog-76.telebit.io/my_account", cookies=request.cookies
         )
         return r.json()
+
+    @app.route("/register", methods=["POST"])
+    def register():
+        r = requests.post(
+            "https://chatty-bulldog-76.telebit.io/sign_up",
+            headers={"Content-Type": "application/json"},
+            json={
+                "username": request.form['username'],
+                "email": request.form['email'],
+                "password": request.form['password'],
+                "name": request.form['name'],
+                "surname": request.form['surname'],
+            }
+        )
+        return forward_response(r)
+    
+    
