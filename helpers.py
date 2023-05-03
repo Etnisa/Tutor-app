@@ -1,5 +1,6 @@
 from flask import make_response, jsonify
 import requests
+from constants import *
 
 
 def forward_response(r):
@@ -11,7 +12,15 @@ def forward_response(r):
 
 
 def get_annocements():
-    return requests.get("https://chatty-bulldog-76.telebit.io/announcements").json()
+    announcements = requests.get("https://chatty-bulldog-76.telebit.io/announcements").json()
+    
+     # cut title
+    for a in announcements:
+        a["short_title"] = a["title"]
+        if len(a["title"]) > MAX_TITLE_LEN:
+            a["short_title"] = a["title"][:MAX_TITLE_LEN] + "..."
+        
+    return announcements
 
 
 def filter_annoucements(search_for):
@@ -34,3 +43,13 @@ def filter_annoucements(search_for):
             filtered.append(a) 
             
     return filtered
+
+
+def get_user_annoucements(user):
+    user_annoucements = []
+    annoucements = get_annocements()
+    for a in annoucements:
+        if a['announcer_username'] == str(user):
+            user_annoucements.append(a)
+
+    return user_annoucements

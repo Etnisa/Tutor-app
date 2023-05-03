@@ -1,0 +1,65 @@
+        body,
+        html {
+            background-color: #daebff;
+        }
+        
+        .myaccount-card {
+            border: solid 1px black;
+            height: 5rem;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+        }
+        
+        .mycard-title {
+            overflow: hidden;
+            max-height: 100%;
+        }
+        
+        .mycard-price {
+            max-height: 100%;
+            overflow: hidden;
+        }
+        
+        .mycard-date {
+            max-height: 100%;
+            overflow: hidden;
+        }
+        
+        .mycard-buttons {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .separation-div {
+            border-bottom: solid 1px black;
+            margin-bottom: 1rem;
+        }
+        
+        .myaccount {
+            background-color: #daebff;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .left_div {
+            background-color: #835F81;
+            border-style: groove;
+            border-color: white;
+        }
+        
+        .myaccount-card-top {
+            border: 0px;
+            padding: 0;
+            margin: 0;
+            height: 2rem;
+            white-space: nowrap;
+        }

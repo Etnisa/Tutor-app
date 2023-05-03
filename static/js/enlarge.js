@@ -10,14 +10,14 @@ function enlarge(e) {
     fetch(`http://127.0.0.1:5000/announcement/${id}`)
         .then(res => res.json())
         .then(data => {
-            let myModal
+            let enlarge_modal
             let enlarge = document.getElementById('annoucement')
             enlarge.innerHTML = data
-            console.log(data)
-            myModal = new bootstrap.Modal(document.getElementById('enlarged'), {});
-            myModal.show();
+                // console.log(data)
+            enlarge_modal = new bootstrap.Modal(document.getElementById('enlarged'), {});
+            enlarge_modal.show();
 
-            document.getElementById('enlarged-close').addEventListener('click', () => { myModal.hide() })
+            document.getElementById('enlarged-close').addEventListener('click', () => { enlarge_modal.hide() })
         })
         .catch(error => console.log(error))
 

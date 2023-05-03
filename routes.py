@@ -1,6 +1,6 @@
 from flask import render_template, request, jsonify, redirect, make_response
 import requests
-from helpers import forward_response, get_annocements, filter_annoucements
+from helpers import forward_response, get_annocements, filter_annoucements, get_user_annoucements
 from constants import *
 import math
 
@@ -31,12 +31,6 @@ def init_routes(app):
             (page - 1) * CARDS_PER_PAGE : page * CARDS_PER_PAGE
         ]
 
-        # cut title
-        for a in announcements:
-            a["short_title"] = a["title"]
-            if len(a["title"]) > MAX_TITLE_LEN:
-                a["short_title"] = a["title"][:MAX_TITLE_LEN] + "..."
-        
         return render_template(
             "index.html", announcements=announcements, pages=pages, page=page
         )
@@ -45,9 +39,10 @@ def init_routes(app):
     def announcements():
         return get_annocements()
 
-    @app.route("/account", methods=["GET", "POST"])
-    def account():
-        return render_template('account.html')
+    @app.route("/account/<user>", methods=["GET"])
+    def account(user):
+        announcements_list = get_user_annoucements(user)
+        return render_template('account.html', announcements_list=announcements_list)
 
     @app.route("/announcement/<int:id>", methods=["GET"])
     def announcement(id):
@@ -116,5 +111,4 @@ def init_routes(app):
             }
         )
         return forward_response(r)
-    
     
