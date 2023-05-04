@@ -1,6 +1,6 @@
 from flask import render_template, request, jsonify, redirect, make_response
 import requests
-from helpers import forward_response, get_annocements, filter_annoucements, get_user_annoucements
+from helpers import forward_response, get_annocements, filter_annoucements, get_user_annoucements, get_my_account
 from constants import *
 import math
 
@@ -42,7 +42,17 @@ def init_routes(app):
     @app.route("/account/<user>", methods=["GET"])
     def account(user):
         announcements_list = get_user_annoucements(user)
-        return render_template('account.html', announcements_list=announcements_list)
+        
+        # is it me
+        is_it_me = False
+        acc = get_my_account(request)
+
+        if 'username' in acc.keys() and acc['username'] == user:
+            is_it_me = True
+        
+        print(is_it_me,acc['username'],user)
+        return render_template('account.html', announcements_list=announcements_list, is_it_me=is_it_me)
+    
 
     @app.route("/announcement/<int:id>", methods=["GET"])
     def announcement(id):
@@ -51,6 +61,16 @@ def init_routes(app):
         ).json()
         annoucement = annoucement[0]
         response = jsonify(render_template("annoucement.html", a=annoucement))
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response
+    
+    @app.route('/announcement_edit/<int:id>', methods=["GET"])
+    def announcement_edit(id):
+        annoucement = requests.get(
+            f"https://chatty-bulldog-76.telebit.io/announcements/{id}"
+        ).json()
+        annoucement = annoucement[0]
+        response = jsonify(render_template("announcement_edit.html", a=annoucement))
         response.headers.add("Access-Control-Allow-Origin", "*")
         return response
 
@@ -92,10 +112,8 @@ def init_routes(app):
 
     @app.route("/my_account", methods=["GET"])
     def my_account():
-        r = requests.get(
-            "https://chatty-bulldog-76.telebit.io/my_account", cookies=request.cookies
-        )
-        return r.json()
+        return get_my_account(request)
+        
 
     @app.route("/register", methods=["POST"])
     def register():

@@ -53,3 +53,9 @@ def get_user_annoucements(user):
             user_annoucements.append(a)
 
     return user_annoucements
+
+def get_my_account(request):
+    r = requests.get(
+            "https://chatty-bulldog-76.telebit.io/my_account", cookies=request.cookies
+        )
+    return r.json()

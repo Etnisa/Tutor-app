@@ -5,98 +5,114 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+
     <title>Moje konto</title>
 </head>
 
 <body style="background-color: #daebff;">
-    <div class="container py-5 myaccount">
-        <div class="row">
-            <div class="col-4">
-                <div class="card mb-2">
-                    <div class="card-body text-center left_div">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
-                        <h5 class="my-3">Imię Nazwisko</h5>
-                        <p class="text mb-1">Kierunek : {{announcements_list[0]['degree_course']}} </p>
-                        <p class="text mb-1">Semestr: {{announcements_list[0]['semester']}} </p>
-                        <p class="text mb-1">E-mail: {{announcements_list[0]['announcer_email']}} </p>
-                        <p class="text mb-1">Numer telefonu: {{announcements_list[0]['phone']}} </p>
+
+    {% include "navbar.html" %}
+
+    <div class="container-fluid d-flex justify-content-center">
+
+        <div class="container py-5 myaccount">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-2">
+                        <div class="card-body text-center left_div">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                            <h5 class="my-3">
+                                {{announcements_list[0]['announcer_name']}} {{announcements_list[0]['announcer_surname']}}
+                            </h5>
+                            <p class="text mb-1">Kierunek : {{announcements_list[0]['degree_course']}} </p>
+                            <p class="text mb-1">Semestr: {{announcements_list[0]['semester']}} </p>
+                            <p class="text mb-1">E-mail: {{announcements_list[0]['announcer_email']}} </p>
+                            <p class="text mb-1">Numer telefonu: {{announcements_list[0]['phone']}} </p>
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
 
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <h5 class="my-3 myaccount-card-top">Twoje ogłoszenia</h5>
+                            <div class='container '>
+                                <div class="myaccount-card-top row mb-3">
 
-            <div class="col-8">
-                <div class="card mb-4">
-                    <div class="card-body text-center">
-                        <h5 class="my-3 myaccount-card-top">Twoje ogłoszenia</h5>
-                        <div class='container '>
-                            <div class="myaccount-card-top row mb-3">
+                                    <div class="mycard-title col-2">
+                                        <span>Tytuł: </span>
+                                    </div>
 
-                                <div class="mycard-title col-5">
-                                    <span>Tytuł: </span>
-                                </div>
+                                    <div class="mycard-price col-4">
+                                        <p>Cena: </p>
+                                    </div>
 
-                                <div class="mycard-price col-1">
-                                    <p>Cena: </p>
-                                </div>
+                                    <div class="mycard-date col-4">
+                                        <p>Data utworzenia:<br>(dzień-miesiąc) </p>
+                                    </div>
 
-                                <div class="mycard-date col-4">
-                                    <p>Data utworzenia: </p>
-                                </div>
+                                    <div class="mycard-buttons col-2">
+                                        <span>Akcja: </span>
 
-                                <div class="mycard-buttons col-2">
-                                    <span>Akcja: </span>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="separation-div"></div>
-
-
-
-                        <div class="container ">
-                            {% for a in announcements_list %}
-
-                            <div class="myaccount-card row mb-3">
-
-                                <div class="mycard-title col-5">
-                                    <span>{{a['short_title']}}</span>
-                                </div>
-
-                                <div class="mycard-price col-2">
-                                    <span>{{a['price']}}</span>
-                                </div>
-
-                                <div class="mycard-date col-2">
-                                    <span>{{a['date_posted']}}</span>
-                                </div>
-
-                                <div class="mycard-buttons col-3">
-                                    <button class="btn btn-primary">Usuń</button>
-                                    <button class="btn btn-warning">Edytuj</button>
-                                    <!-- tutaj może być buba -->
+                                    </div>
 
                                 </div>
                             </div>
+                            <div class="separation-div"></div>
 
-                            {%endfor%}
+
+
+                            <div class="container">
+                                {% for a in announcements_list %}
+
+                                <div class="myaccount-card row mb-3">
+
+                                    <div class="mycard-title col-5">
+                                        <span>{{a['short_title']}}</span>
+                                    </div>
+
+                                    <div class="mycard-price col-2">
+                                        <span>{{a['price']}}</span>
+                                    </div>
+
+                                    <div class="mycard-date col-2">
+                                        <span>
+                                        {{a['date_posted'][8:]}}{{a['date_posted'][4:7]}}
+                                    </span>
+                                    </div>
+
+                                    {% if is_it_me %}
+                                    <div class=" col-3">
+                                        <button class="btn btn-primary ">Usuń</button>
+                                        <a class="enlarge_acc_account" id="{{ a['id'] }}"><button class="btn btn-warning ">Edytuj</button></a>
+                                        <!-- tutaj może być buba -->
+
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                {%endfor%}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div id="annoucement_home_page"></div>
+
     </div>
 
-
-
-
-
-
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/authentication.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/enlarge_acc_account.js') }}"></script>
 
 
 </body>

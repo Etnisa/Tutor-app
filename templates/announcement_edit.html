@@ -1,0 +1,35 @@
+<div class="modal-xl modal position-fixed" id="annoucement_home_page_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Szczegóły</h5>
+                <button type="button" class="btn-close" id="enlarged-close" aria-label="Close"></button>
+                <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col ">
+                    <form action="">
+                        <div class="ann-element"> <input type="text" id="ann_title" value="{{a['title']}}" placeholder="Brak danych"></div>
+                        <div><input type="text" id="ann_content" value="{{a['content']}}" placeholder="Brak danych"></div>
+
+                        <div class="row">
+                            <div class="col-5 ann-element">
+                                <input class="w-100" type="text" id="ann_price" value="{{a['price']}}" placeholder="Brak danych">
+                            </div>
+                            <div class="col-5 ann-element">
+                                <input class="w-100" type="checkbox" id="ann_neg" value="true">
+                            </div>
+                        </div>
+
+
+                        <div class="ann-element"><input type="text " id="ann_degree_course " value="{{a[ 'degree_course']}} " placeholder="Brak danych "></div>
+                        <div class="ann-element"><input type="text " id="ann_subject " value="{{a[ 'subject']}} " placeholder="Brak danych "></div>
+                        <div class="ann-element"><input type="text " id="ann_semester " value="{{a[ 'semester']}} " placeholder="Brak danych "></div>
+                        <button type="submit ">Wyślij</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
