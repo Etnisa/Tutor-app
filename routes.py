@@ -35,6 +35,10 @@ def init_routes(app):
             "index.html", announcements=announcements, pages=pages, page=page
         )
 
+
+
+
+
     @app.route("/announcements", methods=["GET"])
     def announcements():
         return get_annocements()
@@ -43,16 +47,34 @@ def init_routes(app):
     def account(user):
         announcements_list = get_user_annoucements(user)
         
-        # is it me
+        # is it me  
         is_it_me = False
         acc = get_my_account(request)
 
         if 'username' in acc.keys() and acc['username'] == user:
             is_it_me = True
         
-        print(is_it_me,acc['username'],user)
-        return render_template('account.html', announcements_list=announcements_list, is_it_me=is_it_me)
+        # print(is_it_me,acc['username'],user)
+        
+        # reviews
+        reviews = []
+        if 'reviews' in acc.keys():
+            reviews = acc['reviews']
+            
+        return render_template('account.html', announcements_list=announcements_list, is_it_me=is_it_me, reviews=reviews)
     
+
+    @app.route("/account_edit", methods=["GET"])
+    def account_edit():
+        account_data = get_my_account(request)
+        print(request.cookies)
+        response = jsonify(render_template('account_edit.html', account_data=account_data))
+        response.headers.add("Access-Control-Allow-Origin", "localhost:5000")
+        response.headers.add("Access-Control-Allow-Credentials", "true")
+        response.headers.add("Access-Control-Allow-Methods", "GET")
+        # print(account_data)
+        return response
+
 
     @app.route("/announcement/<int:id>", methods=["GET"])
     def announcement(id):
@@ -61,9 +83,9 @@ def init_routes(app):
         ).json()
         annoucement = annoucement[0]
         response = jsonify(render_template("annoucement.html", a=annoucement))
-        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add("Access-Control-Allow-Origin", "http://127.0.0.1:5000/account_edit")
         return response
-    
+
     @app.route('/announcement_edit/<int:id>', methods=["GET"])
     def announcement_edit(id):
         annoucement = requests.get(

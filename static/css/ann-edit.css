@@ -1,3 +1,36 @@
 .ann-element {
     margin: 1rem;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+span {
+    margin: 0rem;
+}
+
+#annoucement_home_page_modal input {
+    max-height: 2rem;
+    margin-left: 2rem;
+    width: 20rem;
+}
+
+textarea {
+    margin-left: 2rem;
+}
+
+#ann_price {
+    width: 4rem;
+}
+
+.ann-edit-element {
+    margin: 1rem;
+}
+
+.edit-account-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pad: 5re;
 }

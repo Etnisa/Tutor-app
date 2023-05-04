@@ -57,3 +57,62 @@
             height: 3rem;
             white-space: nowrap;
         }
+        
+        .btn_guzik {
+            border-radius: 4px;
+            background-color: #ffc107;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 28px;
+            padding: 20px;
+            width: 200px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .btn_guzik span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+        
+        .btn_guzik span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+        
+        .btn_guzik:hover span {
+            padding-right: 25px;
+        }
+        
+        .btn_guzik:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+        
+        .container_comments {
+            background: #daebff;
+        }
+        
+        .container_row h3 {
+            display: flex;
+            justify-content: center;
+            text-decoration-style: italic;
+        }
+        
+        .container_comments {
+            background: #FFFFFF;
+            padding: 5%;
+            border-radius: 20px;
+        }
+        
+        #komentarz {
+            padding-left: 80%;
+        }

@@ -5,7 +5,8 @@ from flask_cors import CORS
 import logging
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True)
+
 logging.getLogger('flask_cors').level = logging.DEBUG
 init_routes(app)
 
