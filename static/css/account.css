@@ -122,3 +122,9 @@
             padding-left: 75%;
             white-space: nowrap;
         }
+        
+        .class_button {
+            margin: auto;
+            width: 80%;
+            padding: 10px;
+        }

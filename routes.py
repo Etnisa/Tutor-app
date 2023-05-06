@@ -1,8 +1,15 @@
-from flask import render_template, request, jsonify, redirect, make_response
+from flask import render_template, request, jsonify, redirect, make_response, Response
 import requests
-from helpers import forward_response, get_annocements, filter_annoucements, get_user_annoucements, get_my_account
+from helpers import (
+    forward_response,
+    get_annocements,
+    filter_annoucements,
+    get_user_annoucements,
+    get_my_account,
+)
 from constants import *
 import math
+from flask_cors import cross_origin
 
 
 def init_routes(app):
@@ -15,7 +22,8 @@ def init_routes(app):
         return redirect("/1", code=302)
 
     @app.route("/<int:page>", methods=["GET", "POST"])
-    def page(page):        
+    def page(page):
+        
         # filter annoucements
         filter = ""
         if "filter" in request.form.keys():
@@ -30,51 +38,58 @@ def init_routes(app):
         announcements = announcements[
             (page - 1) * CARDS_PER_PAGE : page * CARDS_PER_PAGE
         ]
+        
+        # get account data
+        account_data = get_my_account(request)
 
         return render_template(
-            "index.html", announcements=announcements, pages=pages, page=page
+            "index.html", announcements=announcements, pages=pages, page=page, account_data=account_data
         )
-
-
-
-
 
     @app.route("/announcements", methods=["GET"])
     def announcements():
         return get_annocements()
 
-    @app.route("/account/<user>", methods=["GET"])
+    # @cross_origin()
+    @app.route("/account/<user>", methods=["GET", "POST"])
     def account(user):
         announcements_list = get_user_annoucements(user)
-        
-        # is it me  
-        is_it_me = False
-        acc = get_my_account(request)
+        account_data = get_my_account(request)
 
-        if 'username' in acc.keys() and acc['username'] == user:
+        # is it me
+        is_it_me = False
+
+        if "username" in account_data.keys() and account_data["username"] == user:
             is_it_me = True
-        
-        # print(is_it_me,acc['username'],user)
-        
+
+        # print(is_it_me,account_data['username'],user)
+
         # reviews
         reviews = []
-        if 'reviews' in acc.keys():
-            reviews = acc['reviews']
-            
-        return render_template('account.html', announcements_list=announcements_list, is_it_me=is_it_me, reviews=reviews)
-    
+        if "reviews" in account_data.keys():
+            reviews = account_data["reviews"]
 
+        return render_template(
+            "account.html",
+            announcements_list=announcements_list,
+            account_data=account_data,
+            is_it_me=is_it_me,
+            reviews=reviews,
+        )
+
+    # @cross_origin()
     @app.route("/account_edit", methods=["GET"])
     def account_edit():
         account_data = get_my_account(request)
         print(request.cookies)
-        response = jsonify(render_template('account_edit.html', account_data=account_data))
-        response.headers.add("Access-Control-Allow-Origin", "localhost:5000")
-        response.headers.add("Access-Control-Allow-Credentials", "true")
-        response.headers.add("Access-Control-Allow-Methods", "GET")
+        response = jsonify(
+            render_template("account_edit.html", account_data=account_data)
+        )
+        # response.headers.add("Access-Control-Allow-Origin", "localhost:5000")
+        # response.headers.add("Access-Control-Allow-Credentials", "true")
+        # response.headers.add("Access-Control-Allow-Methods", "GET")
         # print(account_data)
         return response
-
 
     @app.route("/announcement/<int:id>", methods=["GET"])
     def announcement(id):
@@ -83,10 +98,12 @@ def init_routes(app):
         ).json()
         annoucement = annoucement[0]
         response = jsonify(render_template("annoucement.html", a=annoucement))
-        response.headers.add("Access-Control-Allow-Origin", "http://127.0.0.1:5000/account_edit")
+        response.headers.add(
+            "Access-Control-Allow-Origin", "http://127.0.0.1:5000/account_edit"
+        )
         return response
 
-    @app.route('/announcement_edit/<int:id>', methods=["GET"])
+    @app.route("/announcement_edit/<int:id>", methods=["GET"])
     def announcement_edit(id):
         annoucement = requests.get(
             f"https://chatty-bulldog-76.telebit.io/announcements/{id}"
@@ -107,6 +124,7 @@ def init_routes(app):
         response = jsonify(render_template("register.html"))
         response.headers.add("Access-Control-Allow-Origin", "*")
         return response
+
     
     @app.route("/login", methods=["POST"])
     def login():
@@ -120,22 +138,20 @@ def init_routes(app):
         )
         
         # login success
-        resp = make_response(redirect('/',302))
         if r.status_code == 200:
-
+            resp = make_response(redirect(f"/account/{get_my_account(r)['username']}", 302))
             cookies = r.cookies.get_dict()
             for c in cookies:
                 resp.set_cookie(c, cookies[c])
         # login error
         else:
+            resp = make_response(redirect("/", 302))
             resp.set_cookie('login_err', '1')
         return resp
-            
 
     @app.route("/my_account", methods=["GET"])
     def my_account():
         return get_my_account(request)
-        
 
     @app.route("/register", methods=["POST"])
     def register():
@@ -143,12 +159,11 @@ def init_routes(app):
             "https://chatty-bulldog-76.telebit.io/sign_up",
             headers={"Content-Type": "application/json"},
             json={
-                "username": request.form['username'],
-                "email": request.form['email'],
-                "password": request.form['password'],
-                "name": request.form['name'],
-                "surname": request.form['surname'],
-            }
+                "username": request.form["username"],
+                "email": request.form["email"],
+                "password": request.form["password"],
+                "name": request.form["name"],
+                "surname": request.form["surname"],
+            },
         )
         return forward_response(r)
-    

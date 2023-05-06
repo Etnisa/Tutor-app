@@ -1,9 +1,9 @@
-<div class="modal-xl modal position-fixed" id="account_edit" tabindex="-1" role="dialog">
+<div class="modal-md modal position-fixed" id="account_edit" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Szczegóły</h5>
-                <button type="button" class="btn-close" id="enlarged-close" aria-label="Close"></button>
+                <button type="button" class="btn-close" id="acc-edit-close" aria-label="Close"></button>
                 <span aria-hidden="true"></span>
                 </button>
             </div>
@@ -12,13 +12,48 @@
 
 
                     <form>
-                        <div class="container-flex row">
-                            <!-- Imie  -->
-                            <div class="form-outline mb-4 col-sm ">
+                        <div>
+                            <!-- Name  -->
+                            <div class="form-outline mb-1">
+                                <span>Imię:</span>
                                 <input type="text" class="form-control" value="{{account_data['name']}}" />
                             </div>
 
+                            <!-- Surname -->
+                            <div class="form-outline mb-1">
+                                <span>Nazwisko: </span>
+                                <input type="text" class="form-control" value="{{account_data['surname']}}" />
+                            </div>
 
+                            <!-- Degree_course -->
+
+                            <div class="form-outline mb-1">
+                                <span>Kierunek: </span>
+                                <input type="text" class="form-control" value="{{account_data['degree_course']}}" />
+                            </div>
+
+
+                            <!-- Semester -->
+                            <div class="form-outline mb-1">
+                                <span>Semestr:</span>
+                                <input type="text" class="form-control" value="{{account_data['semester']}}" />
+                            </div>
+
+                            <!-- E-mail   -->
+                            <div class="form-outline mb-1">
+                                <span>E-mail:</span>
+                                <input type="text" class="form-control" value="{{account_data['email']}}" />
+                            </div>
+
+                            <!-- Phone  -->
+                            <div class="form-outline mb-1">
+                                <span>Numer telefonu:</span>
+                                <input type="text" class="form-control" value="{{account_data['phone']}}" />
+                            </div>
+
+                            <div class="class_button">
+                                <button class="btn btn-warning btn_edit_date" id="">Zmień dane</div>
+                            </div>
                     </form>
                     </div>
                 </div>

@@ -1,0 +1,27 @@
+- schować logowanie pod zalogowniu
+
+- dodac ikonkę moje konto po zalogowaniu
+
+- napisac backend ogłoszen: EDYCJA I DODAWANIE I USUWANIE
+
+- skończyć formularz edycji ogłoszęń
+
+- usuwanie ogłoszenia
+
+- dodawanie komentarzy
+
+- dodawanie ogłoszeń
+
+- edycja profilu
+
+- naprawić bugi
+
+- dodawanie avatarów
+
+- zaciąganie awatarów na główną
+
+- favicon/logo
+
+- poprawić wygląd modali
+
+

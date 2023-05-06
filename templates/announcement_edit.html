@@ -1,4 +1,4 @@
-<div class="modal-xl modal position-fixed" id="annoucement_home_page_modal" tabindex="-1" role="dialog">
+<div class="modal-xl modal container-sm" id="annoucement_home_page_modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,47 +8,49 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="col ">
-                    <form action="">
+                <!-- tu był div z colem -->
+                <form action="">
 
-                        <!-- TITLE -->
-                        <div class="ann-element"> <span>Tytuł: </span> <input type="text" id="ann_title" value="{{a['title']}}" placeholder="Brak danych"></div>
-                        <!-- CONTENT -->
+                    <!-- TITLE -->
+                    <div class="ann-element"> <span>Tytuł: </span> <input type="text" id="ann_title" value="{{a['title']}}" placeholder="Brak danych"></div>
+                    <!-- CONTENT -->
 
-                        <div class="ann-element"><span>Opis: </span>
-                            <textarea id="comment" name="comment" rows="5" cols="50" placeholder="Brak danych">{{a['content']}}</textarea>
+                    <div class="ann-element"><span>Opis: </span>
+                        <textarea id="comment" name="comment" rows="5" cols="50" placeholder="Brak danych">{{a['content']}}</textarea>
+                    </div>
+
+                    <div class="row ms-1">
+
+                        <div class="col-6 ann-element ">
+                            <!-- PRICE -->
+                            <span>Cena:</span>
+                            <input type="text" id="ann_price" value="{{a['price']}}" placeholder="Brak danych">
                         </div>
 
-                        <div class="row">
-                            <div class="col-3"></div>
-                            <div class="col-3 ann-element">
-                                <!-- PRICE -->
-                                <span>Cena: </span>
-                                <input type="text" id="ann_price" value="{{a['price']}}" placeholder="Brak danych">
-                            </div>
 
+                        <div class=" col-4 ann-element">
 
-                            <div class="col-3 ann-element">
-                                <!-- CHECKBOX -->
-                                <span>Do negocjacji?</span> {% if a['is_negotiable']%}
-                                <input type="checkbox" id="ann_neg" checked> {% else %}
-                                <input type="checkbox" id="ann_neg"> {% endif %}
-                                <div class="col-3"></div>
-                            </div>
+                            <!-- CHECKBOX -->
+
+                            <span>Do negocjacji?</span> {% if a['is_negotiable']%}
+                            <input type="checkbox" id="ann_neg" checked> {% else %}
+                            <input type="checkbox" id="ann_neg"> {% endif %}
+
                         </div>
+                    </div>
 
-                        <!-- DEGREE-COURSE -->
+                    <!-- DEGREE-COURSE -->
 
-                        <div class="ann-element"> <span>Kierunek: </span> <input type="text " id="ann_degree_course " value="{{a[ 'degree_course']}} " placeholder="Brak danych "></div>
-                        <!-- SUBJECT -->
+                    <div class="ann-element"> <span>Kierunek: </span> <input type="text " id="ann_degree_course " value="{{a[ 'degree_course']}} " placeholder="Brak danych "></div>
+                    <!-- SUBJECT -->
 
-                        <div class="ann-element"><span>Przedmiot: </span><input type="text " id="ann_subject " value="{{a[ 'subject']}} " placeholder="Brak danych "></div>
-                        <!-- SEMESTER -->
+                    <div class="ann-element"><span>Przedmiot: </span><input type="text " id="ann_subject " value="{{a[ 'subject']}} " placeholder="Brak danych "></div>
+                    <!-- SEMESTER -->
 
-                        <div class="ann-element"> <span>Semestr: </span> <input type="text " id="ann_semester " value="{{a[ 'semester']}} " placeholder="Brak danych "></div>
-                        <div class="ann-element"><button type="submit ">Edytuj</button></div>
-                    </form>
-                </div>
+                    <div class="ann-element"> <span>Semestr: </span> <input type="text " id="ann_semester " value="{{a[ 'semester']}} " placeholder="Brak danych "></div>
+                    <div class="ann-element"><button type="submit ">Edytuj</button></div>
+                </form>
+
             </div>
         </div>
     </div>

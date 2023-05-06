@@ -1,5 +1,5 @@
 <nav class="navbar navbar-fluid navbar-light menu" style="background-color:#3995ff">
-    <a class="navbar-brand" href="#"></a>
+    <a class="navbar-brand" href="/1"> Tutor-app</a>
     <form action="/1" , method="post">
         <div class="row">
             <div class="col-8">
@@ -11,15 +11,37 @@
             </div>
         </div>
     </form>
+
+    <!-- user name, surname -->
+    {% if 'username' in account_data.keys() %}
     <div class="zaloguj">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" id="login-button" href="#">
-                    Zaloguj się
+
+                <a class="nav-link" id="profil-button" href="/account/{{account_data['username']}}">
+                    {{ account_data['name']|capitalize }} {{ account_data['surname']|capitalize }}
                 </a>
             </li>
         </ul>
     </div>
+    {% endif %}
+
+    <!-- login/logout -->
+    <div class="zaloguj">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                {% if 'username' in account_data.keys() %}
+                <a class="nav-link" id="logout-button" href="#">
+                    Wyloguj się
+                </a> {% else %}
+                <a class="nav-link" id="login-button" href="#">
+                    Zaloguj się
+                </a> {% endif %}
+            </li>
+        </ul>
+    </div>
+
+
 </nav>
 
 <!-- login/register modal -->

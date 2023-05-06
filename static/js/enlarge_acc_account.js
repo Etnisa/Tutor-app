@@ -40,7 +40,7 @@ function account_edit(e) {
             enlarge_account_modal = new bootstrap.Modal(document.getElementById('account_edit'), {});
             enlarge_account_modal.show();
 
-            //document.getElementById('enlarged-close').addEventListener('click', () => { enlarge_acc_account_modal.hide() })
+            document.getElementById('acc-edit-close').addEventListener('click', () => { enlarge_account_modal.hide() })
         })
         .catch(error => console.log(error))
 }

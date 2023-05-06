@@ -22,6 +22,7 @@ textarea {
 
 #ann_price {
     width: 4rem;
+    margin: 0rem;
 }
 
 .ann-edit-element {
@@ -32,5 +33,9 @@ textarea {
     display: flex;
     justify-content: center;
     align-items: center;
-    pad: 5re;
+    pad: 5rem;
+}
+
+#span-price {
+    margin: 0rem;
 }
