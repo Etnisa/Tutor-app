@@ -27,7 +27,7 @@ function enlarge_acc_account(e) {
 
 
 // edit user data btn
-let edit_profil = document.getElementById("account_edit_btn").addEventListener('click', account_edit)
+if (edit_profil != null) edit_profil.addEventListener('click', account_edit)
 
 function account_edit(e) {
     fetch(`http://127.0.0.1:5000/account_edit`, { 'credentials': 'include' })

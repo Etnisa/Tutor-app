@@ -33,7 +33,15 @@
                             <p class="text mb-1">Semestr: {{announcements_list[0]['semester']}} </p>
                             <p class="text mb-1">E-mail: {{announcements_list[0]['announcer_email']}} </p>
                             <p class="text mb-1">Numer telefonu: {{announcements_list[0]['phone']}} </p>
-                            {% if is_it_me %}<button class="btn_guzik" id="account_edit_btn"><span>Edytuj</span>{% endif %}
+                            <script>
+                                let edit_profil = null
+                            </script>
+                            {% if is_it_me %}<button class="btn_guzik" id="account_edit_btn"><span>Edytuj</span>
+                                <script>
+                                    // edit user data btn
+                                    edit_profil = document.getElementById("account_edit_btn")
+                                </script>
+                                {% endif %}
                         </div>
                     </div>
                     <!-- reviews -->
@@ -71,6 +79,7 @@
 
                             <!-- reviews -->
                         </div>
+
                         <div id="div_appear">{%include "reviews.html" %}</div>
 
                     </div>

@@ -1,14 +1,10 @@
 <div>
     {% for r in reviews %}
-
-    <div class="container_row">
-        <h3>Komentarze</h3>
-    </div>
-
-    <div class="container_comments">
-        <span style="font-size: 12px">{{ r['date'] }}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Ocena: {{ r['rate'] }}/5</span><br>
+    <div class="container_comments mb-3">
+        <span style="font-size: 12px">{{ r['date'] }}</span><br>
         <span>{{ r['review'] }}</span><br>
-        <span id="komentarz"><i>{{ r['reviewer'] }}</i></span>
+        <span id="komentarz"><i>{{ r['reviewer'] }}</i></span><br>
+        <span id="komentarz_linia_pod">Ocena: {{ r['rate'] }}/5</span>
     </div>
     {% endfor %}
 </div>

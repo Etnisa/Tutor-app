@@ -115,4 +115,10 @@
         
         #komentarz {
             padding-left: 80%;
+            white-space: nowrap;
+        }
+        
+        #komentarz_linia_pod {
+            padding-left: 75%;
+            white-space: nowrap;
         }
