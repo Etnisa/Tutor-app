@@ -103,15 +103,23 @@ def init_routes(app):
         )
         return response
 
-    @app.route("/announcement_edit/<int:id>", methods=["GET"])
-    def announcement_edit(id):
-        annoucement = requests.get(
-            f"https://chatty-bulldog-76.telebit.io/announcements/{id}"
+    @app.route("/announcement", methods=["POST"])
+    def announcement_add():
+        annoucement = requests.post(
+            f"https://chatty-bulldog-76.telebit.io/announcements",
+            headers={"Content-Type": "application/json"},
+            json={
+                "title": "Ucze jak robić równania różniczkowe",
+                "content": "fajny opis",
+                "price": 120,
+                "is_negotiable": False,
+                "degree_course": "informatyka",
+                "subject": "matematyka",
+                "semester": 4
+                }
         ).json()
-        annoucement = annoucement[0]
-        response = jsonify(render_template("announcement_edit.html", a=annoucement))
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        return response
+        return ""
+    
 
     @app.route("/login_modal", methods=["GET"])
     def login_modal():
@@ -167,3 +175,29 @@ def init_routes(app):
             },
         )
         return forward_response(r)
+
+    @app.route("/logout", methods=["GET"])
+    def logout():
+        r = requests.get("https://chatty-bulldog-76.telebit.io/logout")
+        resp = make_response(redirect('/',302))
+        resp.set_cookie('session', '', expires=0)
+        return resp
+    
+
+
+    # @app.route("/edit_acc", methods=["PUT"])
+    # def edit_acc():
+    #     r = requests.post(
+    #         "https://chatty-bulldog-76.telebit.io/my_account",
+    #         headers={"Content-Type": "application/json"}, # DO SPRAWDZENIA PRZEZ KAMILA
+    #         json={
+    #             "description":request.form[''],
+    #             "email": request.form[''],
+    #             "name": request.form[''],
+    #             "phone": request.form[''],
+    #             "surname": request.form[''],
+    #             "semester": request.form[''],
+    #             "degree_course":request.form[''] 
+    #         }
+    #     )
+    # return 

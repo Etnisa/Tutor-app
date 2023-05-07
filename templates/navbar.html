@@ -1,5 +1,22 @@
 <nav class="navbar navbar-fluid navbar-light menu" style="background-color:#3995ff">
+    <!-- logo -->
     <a class="navbar-brand" href="/1"> Tutor-app</a>
+
+    <!-- add annoucement -->
+    {% if 'username' in account_data.keys() %}
+    <div class="zaloguj">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+
+                <a class="nav-link" id="add_ann_btn" href="#">
+            Dodaj ogłoszenie
+        </a>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- search bar -->
     <form action="/1" , method="post">
         <div class="row">
             <div class="col-8">
@@ -26,12 +43,14 @@
     </div>
     {% endif %}
 
+
+
     <!-- login/logout -->
     <div class="zaloguj">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 {% if 'username' in account_data.keys() %}
-                <a class="nav-link" id="logout-button" href="#">
+                <a class="nav-link" id="logout-button" href="/logout">
                     Wyloguj się
                 </a> {% else %}
                 <a class="nav-link" id="login-button" href="#">
@@ -40,7 +59,6 @@
             </li>
         </ul>
     </div>
-
 
 </nav>
 

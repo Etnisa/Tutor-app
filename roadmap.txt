@@ -12,7 +12,7 @@
 
 - dodawanie ogłoszeń
 
-- edycja profilu
+- edycja profilu (Front-done)
 
 - naprawić bugi
 

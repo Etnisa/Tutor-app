@@ -11,48 +11,48 @@
                 <div class="modal-body login_screen">
 
 
-                    <form>
+                    <form action="edit_acc" method="post" name="_PUT">
                         <div>
                             <!-- Name  -->
                             <div class="form-outline mb-1">
                                 <span>Imię:</span>
-                                <input type="text" class="form-control" value="{{account_data['name']}}" />
+                                <input type="text" name="name" class="form-control" value="{{account_data['name']}}" />
                             </div>
 
                             <!-- Surname -->
                             <div class="form-outline mb-1">
                                 <span>Nazwisko: </span>
-                                <input type="text" class="form-control" value="{{account_data['surname']}}" />
+                                <input type="text" name="surname" class="form-control" value="{{account_data['surname']}}" />
                             </div>
 
                             <!-- Degree_course -->
 
                             <div class="form-outline mb-1">
                                 <span>Kierunek: </span>
-                                <input type="text" class="form-control" value="{{account_data['degree_course']}}" />
+                                <input type="text" name="degree_course" class="form-control" value="{{account_data['degree_course']}}" />
                             </div>
 
 
                             <!-- Semester -->
                             <div class="form-outline mb-1">
                                 <span>Semestr:</span>
-                                <input type="text" class="form-control" value="{{account_data['semester']}}" />
+                                <input type="text" name="semester" class="form-control" value="{{account_data['semester']}}" />
                             </div>
 
                             <!-- E-mail   -->
                             <div class="form-outline mb-1">
                                 <span>E-mail:</span>
-                                <input type="text" class="form-control" value="{{account_data['email']}}" />
+                                <input type="text" name="email" class="form-control" value="{{account_data['email']}}" />
                             </div>
 
                             <!-- Phone  -->
                             <div class="form-outline mb-1">
                                 <span>Numer telefonu:</span>
-                                <input type="text" class="form-control" value="{{account_data['phone']}}" />
+                                <input type="text" name="phone" class="form-control" value="{{account_data['phone']}}" />
                             </div>
 
                             <div class="class_button">
-                                <button class="btn btn-warning btn_edit_date" id="">Zmień dane</div>
+                                <button type="submit" class="btn btn-warning btn_edit_date" id="edit-acc-btn">Zmień dane</div>
                             </div>
                     </form>
                     </div>
