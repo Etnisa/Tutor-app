@@ -1,0 +1,61 @@
+
+    <div class=" modal" id="ann_add_modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Dodaj ogłoszenie</h5>
+                    <button type="button" class="btn-close" id="enlarged-close" aria-label="Close"></button>
+                    <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- tu był div z colem -->
+                    <form action="/add_ann" method="post">
+
+                        <!-- TITLE -->
+                        <div class="ann-element" > <span>Tytuł: </span> <input type="text" name="title" id="ann_title" value="" placeholder="Brak danych" required></div>
+                        <!-- CONTENT -->
+
+                        <div class="ann-element"><span>Opis: </span>
+                            <textarea id="comment" name="comment" rows="5" cols="50" placeholder="Brak danych" required></textarea>
+                        </div>
+
+                        <div class="row ms-1">
+
+                            <div class="col-6 ann-element ">
+                                <!-- PRICE -->
+                                <span>Cena:</span>
+                                <input type="number" id="ann_price" name="price" value="0" placeholder="Brak danych" required>
+                            </div>
+
+
+                            <div class=" col-4 ann-element">
+
+                                <!-- CHECKBOX -->
+
+                                <span>Do negocjacji?</span> 
+                                <input type="checkbox" id="ann_neg"  name="neg">
+
+                            </div>
+                        </div>
+
+                        <!-- DEGREE-COURSE -->
+
+                        <div class="ann-element" > <span>Kierunek: </span> <input type="text " id="ann_degree_course " name="degree_course" value="" placeholder="Brak danych " required></div>
+                        <!-- SUBJECT -->
+
+                        <div class="ann-element"><span>Przedmiot: </span><input type="text " id="ann_subject " name="subjec" value="" placeholder="Brak danych " required></div>
+                        <!-- SEMESTER -->
+
+                        <div class="ann-element"> <span>Semestr: </span> <input type="number" id="ann_semester " name="semester" value="" placeholder="Brak danych " required></div>
+                        <div class="ann-element"><button class="btn-warning" type="submit">Dodaj</button></div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+

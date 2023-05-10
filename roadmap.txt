@@ -1,6 +1,3 @@
-- schować logowanie pod zalogowniu
-
-- dodac ikonkę moje konto po zalogowaniu
 
 - napisac backend ogłoszen: EDYCJA I DODAWANIE I USUWANIE
 
@@ -24,4 +21,4 @@
 
 - poprawić wygląd modali
 
-
+- PO ZALOGOWANIU i PO ZMIANIE DANYCH UŻYTKOWNIKA POPRAWIĆ POWRÓT NA KONTO

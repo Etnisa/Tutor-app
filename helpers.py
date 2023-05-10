@@ -12,14 +12,16 @@ def forward_response(r):
 
 
 def get_annocements():
-    announcements = requests.get("https://chatty-bulldog-76.telebit.io/announcements").json()
-    
-     # cut title
+    announcements = requests.get(
+        "https://chatty-bulldog-76.telebit.io/announcements"
+    ).json()
+
+    # cut title
     for a in announcements:
         a["short_title"] = a["title"]
         if len(a["title"]) > MAX_TITLE_LEN:
             a["short_title"] = a["title"][:MAX_TITLE_LEN] + "..."
-        
+
     return announcements
 
 
@@ -33,15 +35,15 @@ def filter_annoucements(search_for):
     for a in annocements:
         values = str(a.values())
         values = values.lower()
-        
+
         add = True
         for s in search_for:
             if values.find(s) < 0:
-                add= False
-        
-        if add: 
-            filtered.append(a) 
-            
+                add = False
+
+        if add:
+            filtered.append(a)
+
     return filtered
 
 
@@ -49,13 +51,14 @@ def get_user_annoucements(user):
     user_annoucements = []
     annoucements = get_annocements()
     for a in annoucements:
-        if a['announcer_username'] == str(user):
+        if a["announcer_username"] == str(user):
             user_annoucements.append(a)
 
     return user_annoucements
 
+
 def get_my_account(request):
     r = requests.get(
-            "https://chatty-bulldog-76.telebit.io/my_account", cookies=request.cookies
-        )
+        "https://chatty-bulldog-76.telebit.io/my_account", cookies=request.cookies
+    )
     return r.json()

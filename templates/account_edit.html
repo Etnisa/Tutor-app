@@ -11,7 +11,7 @@
                 <div class="modal-body login_screen">
 
 
-                    <form action="edit_acc" method="post" name="_PUT">
+                    <form action="/edit_acc" method="post">
                         <div>
                             <!-- Name  -->
                             <div class="form-outline mb-1">
@@ -51,6 +51,14 @@
                                 <input type="text" name="phone" class="form-control" value="{{account_data['phone']}}" />
                             </div>
 
+                            <!-- Description  -->
+                            <div class="form-outline">
+                                <span>Opis:</span>
+                                <div class="container_tatratee">
+                                    <textarea type="text" name="content" class="form-control ">{{account_data['description']}}</textarea>
+                                </div>
+                            </div>
+                                                            <!-- TO JEST PRZYCISK ZMIEN DANE W FORMULARZU  -->
                             <div class="class_button">
                                 <button type="submit" class="btn btn-warning btn_edit_date" id="edit-acc-btn">Zmień dane</div>
                             </div>
