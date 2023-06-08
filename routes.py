@@ -11,6 +11,7 @@ import requests
 from constants import *
 import math
 from helpers import *
+import base64
 
 
 def init_routes(app):
@@ -32,8 +33,8 @@ def init_routes(app):
 
         # limit anoucements qty
         announcements = announcements[
-            (page - 1) * CARDS_PER_PAGE : page * CARDS_PER_PAGE
-        ]
+                        (page - 1) * CARDS_PER_PAGE: page * CARDS_PER_PAGE
+                        ]
 
         # get account data
         account_data = get_my_account(request)
@@ -65,7 +66,7 @@ def init_routes(app):
         announcements_list = get_user_annoucements(user)
         account_data = get_my_account(request)
         profile = requests.get(f"https://chatty-bulldog-76.telebit.io/user/{user}", cookies=request.cookies).json()
-        
+
         # is it me
         is_it_me = False
 
@@ -130,7 +131,7 @@ def init_routes(app):
         response = jsonify(render_template("announcement_edit.html", a=annoucement))
         response.headers.add("Access-Control-Allow-Origin", "*")
         return response
-    
+
     @app.route("/add_ann_modal", methods=["GET"])
     def add_ann_modal():
         response = jsonify(render_template("announcement_add.html"))
@@ -142,7 +143,7 @@ def init_routes(app):
         is_negotiable = False
         if 'neg' in request.form.keys() and request.form['neg'] == "on":
             is_negotiable = True
-            
+
         r = requests.post(
             f"https://chatty-bulldog-76.telebit.io/announcements",
             cookies=request.cookies,
@@ -167,7 +168,6 @@ def init_routes(app):
             resp = make_response(redirect(f"/account/{get_my_account(request)['username']}", 302))
             print("ACHTUNG GRANADE")
         return resp
-
 
     @app.route("/login_modal", methods=["GET"])
     def login_modal():
@@ -209,7 +209,7 @@ def init_routes(app):
     @app.route("/my_account", methods=["GET"])
     def my_account():
         return get_my_account(request)
-     
+
     @app.route("/register", methods=["POST"])
     def register():
         r = requests.post(
@@ -249,25 +249,45 @@ def init_routes(app):
                 "degree_course": request.form["degree_course"],
             },
         )
-        if r.status_code == 200:
-            resp = make_response(redirect(f"/account/{get_my_account(request)['username']}", 302))
+        username = get_my_account(request)['username']
 
+        if r.status_code == 200:
+            resp = make_response(redirect(f"/account/{username}", 302))
         else:
             # TODO flash error
             flash("Błędne dane")
-            resp = make_response(redirect(f"/account/{get_my_account(request)['username']}", 302))
+            resp = make_response(redirect(f"/account/{username}", 302))
             print("ACHTUNG GRANADE")
+
+        # file
+        r = requests.put(
+            "https://chatty-bulldog-76.telebit.io/my_account/avatar",
+            cookies=request.cookies,
+            files=request.files
+        )
+
+        if r.status_code == 200:
+            resp = make_response(redirect(f"/account/{username}", 302))
+            # delete cached avatar
+            if username in avatar_cache.keys():
+                avatar_cache.pop(username)
+        else:
+            print(r.content)
+            # TODO flash error
+            flash("Błędne dane pliku")
+            resp = make_response(redirect(f"/account/{username}", 302))
+            print("ACHTUNG GRANADE")
+
         return resp
 
-
     @app.route("/edit_ann", methods=["POST"])
-    def ann_edit(): 
+    def ann_edit():
         id = request.form["id"]
         is_negotiable = False
         if 'neg' in request.form.keys() and request.form['neg'] == "on":
             is_negotiable = True
 
-        r  = requests.put(
+        r = requests.put(
             f"https://chatty-bulldog-76.telebit.io/announcements/{id}",
             cookies=request.cookies,
             headers={"Content-Type": "application/json"},
@@ -290,14 +310,11 @@ def init_routes(app):
             resp = make_response(redirect(f"/account/{get_my_account(request)['username']}", 302))
             print("ACHTUNG GRANADE")
         return resp
-    
-
-
 
     @app.route("/del_ann/<id>", methods=["POST"])
-    def del_edit(id): 
+    def del_edit(id):
         print(request.cookies.get('session'))
-        r  = requests.delete(
+        r = requests.delete(
             f"https://chatty-bulldog-76.telebit.io/announcements/{id}",
             cookies=request.cookies
         )

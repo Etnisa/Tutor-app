@@ -5,66 +5,84 @@
                 <h5 class="modal-title">Szczegóły</h5>
                 <button type="button" class="btn-close" id="acc-edit-close" aria-label="Close"></button>
                 <span aria-hidden="true"></span>
-                </button>
+
             </div>
             <div class="modal-body edit-account-form ">
                 <div class="modal-body login_screen">
 
 
-                    <form action="/edit_acc" method="post">
+                    <form action="/edit_acc" method="post" enctype="multipart/form-data">
                         <div>
                             <!-- Name  -->
                             <div class="form-outline mb-1">
                                 <span>Imię:</span>
-                                <input type="text" name="name" class="form-control" value="{{account_data['name']}}" />
+                                <input type="text" name="name" class="form-control" value="{{ account_data['name'] }}"/>
                             </div>
 
                             <!-- Surname -->
                             <div class="form-outline mb-1">
                                 <span>Nazwisko: </span>
-                                <input type="text" name="surname" class="form-control" value="{{account_data['surname']}}" />
+                                <input type="text" name="surname" class="form-control"
+                                       value="{{ account_data['surname'] }}"/>
                             </div>
 
                             <!-- Degree_course -->
 
                             <div class="form-outline mb-1">
                                 <span>Kierunek: </span>
-                                <input type="text" name="degree_course" class="form-control" value="{{account_data['degree_course']}}" />
+                                <input type="text" name="degree_course" class="form-control"
+                                       value="{{ account_data['degree_course'] }}"/>
                             </div>
 
 
                             <!-- Semester -->
                             <div class="form-outline mb-1">
                                 <span>Semestr:</span>
-                                <input type="text" name="semester" class="form-control" value="{{account_data['semester']}}" />
+                                <input type="text" name="semester" class="form-control"
+                                       value="{{ account_data['semester'] }}"/>
                             </div>
 
                             <!-- E-mail   -->
                             <div class="form-outline mb-1">
                                 <span>E-mail:</span>
-                                <input type="text" name="email" class="form-control" value="{{account_data['email']}}" />
+                                <input type="text" name="email" class="form-control"
+                                       value="{{ account_data['email'] }}"/>
                             </div>
 
                             <!-- Phone  -->
                             <div class="form-outline mb-1">
                                 <span>Numer telefonu:</span>
-                                <input type="text" name="phone" class="form-control" value="{{account_data['phone']}}" />
+                                <input type="text" name="phone" class="form-control"
+                                       value="{{ account_data['phone'] }}"/>
                             </div>
 
                             <!-- Description  -->
                             <div class="form-outline">
                                 <span>Opis:</span>
                                 <div class="container_tatratee">
-                                    <textarea type="text" name="content" class="form-control ">{{account_data['description']}}</textarea>
+                                    <textarea type="text" name="content"
+                                              class="form-control ">{{ account_data['description'] }}</textarea>
                                 </div>
                             </div>
-                                                            <!-- TO JEST PRZYCISK ZMIEN DANE W FORMULARZU  -->
-                            <div class="class_button">
-                                <button type="submit" class="btn btn-warning btn_edit_date" id="edit-acc-btn">Zmień dane</div>
+
+                            <!-- Description  -->
+                            <div>
+                                <span>Zdjęcie profilowe:</span>
+                                <input type="file" class="form-control" name="file" accept="image/png, image/jpeg">
+
                             </div>
+
+
+                            <!-- TO JEST PRZYCISK ZMIEN DANE W FORMULARZU  -->
+                            <div class="class_button">
+                                <button type="submit" class="btn btn-warning btn_edit_date" id="edit-acc-btn">Zmień
+                                    dane
+                                </button>
+                            </div>
+                        </div>
                     </form>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
