@@ -1,6 +1,10 @@
 from flask import make_response, jsonify
 import requests
 from constants import *
+import base64
+
+
+avatar_cache = {}
 
 
 def forward_response(r):
@@ -62,3 +66,16 @@ def get_my_account(request):
         "https://chatty-bulldog-76.telebit.io/my_account", cookies=request.cookies
     )
     return r.json()
+
+
+def get_avatar(username):
+    if username in avatar_cache.keys():
+        avatar = avatar_cache[username]
+        print(f"{username} avatar readed from cache")
+    else:
+        avatar = requests.get(f"https://chatty-bulldog-76.telebit.io/user/{username}/avatar").json()
+        # default avatars are not cached
+        if len(avatar_cache) < AVATAR_CACHE_SIZE and avatar is not None:
+            avatar_cache[username] = avatar
+        print(f"{username} avatar readed from api")
+    return avatar

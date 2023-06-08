@@ -1,6 +1,5 @@
 from flask import Flask, Response, request
 from routes import init_routes
-from helpers import *
 from flask_cors import CORS
 import logging
 
@@ -11,6 +10,7 @@ app.secret_key = 'super secret key'
 CORS(app, supports_credentials=True)
 
 logging.getLogger("flask_cors").level = logging.DEBUG
+
 init_routes(app)
 
 if __name__ == "__main__":

@@ -20,7 +20,7 @@
     display: flex;
     justify-content: space-between;
     padding: 1rem;
-    border-bottom: solid 1px;
+    border-bottom: solid 1px var(--bs-border-color);
 }
 
 .title-line {
@@ -50,7 +50,7 @@
 }
 
 .right-side-enlarged {
-    background-color: khaki;
+    /*background-color: khaki;*/
     width: 40%;
 }
 

@@ -19,7 +19,6 @@
 
 <body>
     {% include "navbar.html" %}
-    
 
     <div class="container-fluid text-center">
         <div class="row justify-content-center">
@@ -32,8 +31,12 @@
 
                     </div>
 
-                    <div class="avatar mx-auto bg-white">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/4.webp" class="rounded" alt="Avatar" />
+                    <div class="avatar mx-auto bg-white" >
+                    {% if avatars[a['announcer_username']] == None %}
+                            <img src="{{ url_for('static', filename='img/default_avatar.jpg') }}" class="rounded ann_avatar" alt="Avatar" />
+                    {% else %}
+                            <img src="data:image/png;base64,{{ avatars[a['announcer_username']] }}" class="rounded ann_avatar" alt="Avatar" />
+                    {% endif %}
                     </div>
 
                     <div class="card-body ">

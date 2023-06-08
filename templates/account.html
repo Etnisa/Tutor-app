@@ -26,7 +26,11 @@
                 <div class="col-lg-4">
                     <div class="card mb-2">
                         <div class="card-body text-center left_div">
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                            {% if avatar == None %}
+                                <img src="{{ url_for('static', filename='img/default_avatar.jpg') }}" class="rounded-circle img-fluid" style="width: 150px;" alt="Avatar" />
+                            {% else %}
+                                <img src="data:image/png;base64,{{ avatar }}" class="rounded-circle img-fluid" style="width: 150px;" alt="Avatar" />
+                            {% endif %}
                             <h5 class="my-3">
                                 {{profile['name']}} {{profile['surname']}}
                             </h5>

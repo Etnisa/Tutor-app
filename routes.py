@@ -8,16 +8,9 @@ from flask import (
     flash,
 )
 import requests
-from helpers import (
-    forward_response,
-    get_annocements,
-    filter_annoucements,
-    get_user_annoucements,
-    get_my_account,
-)
 from constants import *
 import math
-from flask_cors import cross_origin
+from helpers import *
 
 
 def init_routes(app):
@@ -45,12 +38,21 @@ def init_routes(app):
         # get account data
         account_data = get_my_account(request)
 
+        # get avatars
+        avatars = {}
+        for a in announcements:
+            username = a['announcer_username']
+            if username not in avatars.keys():
+                avatars[username] = get_avatar(username)
+        print(avatars)
+
         return render_template(
             "index.html",
             announcements=announcements,
             pages=pages,
             page=page,
             account_data=account_data,
+            avatars=avatars
         )
 
     @app.route("/announcements", methods=["GET"])
@@ -77,13 +79,17 @@ def init_routes(app):
         if "reviews" in account_data.keys():
             reviews = account_data["reviews"]
 
+        # avatar
+        avatar = get_avatar(profile['username'])
+
         return render_template(
             "account.html",
             announcements_list=announcements_list,
             account_data=account_data,
             is_it_me=is_it_me,
             reviews=reviews,
-            profile=profile
+            profile=profile,
+            avatar=avatar
         )
 
     # @cross_origin()
@@ -105,7 +111,11 @@ def init_routes(app):
             f"https://chatty-bulldog-76.telebit.io/announcements/{id}"
         ).json()
         annoucement = annoucement[0]
-        response = jsonify(render_template("annoucement.html", a=annoucement))
+
+        username = annoucement['announcer_username']
+        avatar = get_avatar(username)
+
+        response = jsonify(render_template("annoucement.html", a=annoucement, avatar=avatar))
         response.headers.add(
             "Access-Control-Allow-Origin", "http://127.0.0.1:5000/account_edit"
         )

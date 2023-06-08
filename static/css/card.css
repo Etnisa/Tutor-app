@@ -1,3 +1,8 @@
+.ann_avatar{
+    width: 240px;
+    height: 240px;
+}
+
 .card-body,
 .card {
     margin: 0;

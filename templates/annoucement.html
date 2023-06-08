@@ -39,7 +39,11 @@
                 <div class="right-side-enlarged">
                     <div class="myavatar-div">
                         <div class="avatar mx-auto bg-white">
-                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/4.webp" class="img-thumbnail" alt="Avatar" />
+                            {% if avatar == None %}
+                                <img src="{{ url_for('static', filename='img/default_avatar.jpg') }}" class="img-thumbnail" alt="Avatar" />
+                            {% else %}
+                                <img src="data:image/png;base64,{{ avatar }}" class="img-thumbnail" alt="Avatar" />
+                            {% endif %}
                         </div>
 
                     </div>
