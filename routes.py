@@ -77,8 +77,8 @@ def init_routes(app):
 
         # reviews
         reviews = []
-        if "reviews" in account_data.keys():
-            reviews = account_data["reviews"]
+        if "reviews" in profile.keys():
+            reviews = profile["reviews"]
 
         # avatar
         avatar = get_avatar(profile['username'])
