@@ -45,7 +45,7 @@ def init_routes(app):
             username = a['announcer_username']
             if username not in avatars.keys():
                 avatars[username] = get_avatar(username)
-        print(avatars)
+        # print(avatars)
 
         return render_template(
             "index.html",
@@ -260,23 +260,25 @@ def init_routes(app):
             print("ACHTUNG GRANADE")
 
         # file
-        r = requests.put(
-            "https://chatty-bulldog-76.telebit.io/my_account/avatar",
-            cookies=request.cookies,
-            files=request.files
-        )
+        if request.files['file'].filename:
+            r = requests.put(
+                "https://chatty-bulldog-76.telebit.io/my_account/avatar",
+                cookies=request.cookies,
+                files=request.files
+            )
 
-        if r.status_code == 200:
-            resp = make_response(redirect(f"/account/{username}", 302))
-            # delete cached avatar
-            if username in avatar_cache.keys():
-                avatar_cache.pop(username)
-        else:
-            print(r.content)
-            # TODO flash error
-            flash("Błędne dane pliku")
-            resp = make_response(redirect(f"/account/{username}", 302))
-            print("ACHTUNG GRANADE")
+            if r.status_code == 200:
+                resp = make_response(redirect(f"/account/{username}", 302))
+                # delete cached avatar
+                if username in avatar_cache.keys():
+                    avatar_cache.pop(username)
+            else:
+                print(r.content)
+                # TODO flash error
+                flash(
+                    "Błąd pliku.Upewnij się że przesyłasz plik w formacie png lub jpg o rozdzielczości nie większej niż 512x512px.")
+                resp = make_response(redirect(f"/account/{username}", 302))
+                print("ACHTUNG GRANADE")
 
         return resp
 

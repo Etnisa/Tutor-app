@@ -1,24 +1,13 @@
+- lista wybierana w edycji profilu, ogłoszenia, tworzeniu ogłoszenia
 
-- napisac backend ogłoszen: EDYCJA I DODAWANIE I USUWANIE
+- dodawanie, wyswietlanie, usuwanie komentarzy (w tym ocen)
 
-- skończyć formularz edycji ogłoszęń
-
-- usuwanie ogłoszenia
-
-- dodawanie komentarzy
-
-- dodawanie ogłoszeń
-
-- edycja profilu (Front-done)
-
-- naprawić bugi
-
-- dodawanie avatarów
-
-- zaciąganie awatarów na główną
+- średnia ocena
 
 - favicon/logo
 
-- poprawić wygląd modali
+- poprawić wygląd modali (np. w edycji danych profilu przycisk nie jest na środku)
 
-- PO ZALOGOWANIU i PO ZMIANIE DANYCH UŻYTKOWNIKA POPRAWIĆ POWRÓT NA KONTO
+- lepsza wyszukiwarka
+
+- naprawić bugi

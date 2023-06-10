@@ -1,7 +1,5 @@
 1) Nie da się zmieniać podstron jeżeli wynik selekcji nie mieści się na stronie
-2) CORS
-3) Po kliknięciu modalu drugi raz zanim się zdąży uruchomić nie da się wyłączyć przyciemnienia ekranu
+2) Po kliknięciu modalu drugi raz zanim się zdąży uruchomić nie da się wyłączyć przyciemnienia ekranu
     (Z jakiegoś powodu przycisk zaloguj się działa prawidłowo)
-4) js wywala błędy po zalogoaniu się
-5) zakomentować niepotrzebne printy
-6) naprawić problemy przy modyfikacji profilu żeby dało się wysłać formularz bez zdjęcia
+3) js wywala błędy po zalogoaniu się
+4) zakomentować niepotrzebne printy
