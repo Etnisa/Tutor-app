@@ -1,12 +1,8 @@
-- lista wybierana w edycji profilu, ogłoszenia, tworzeniu ogłoszenia
-
 - dodawanie, wyswietlanie, usuwanie komentarzy (w tym ocen)
 
 - średnia ocena
 
-- favicon/logo
-
-- poprawić wygląd modali (np. w edycji danych profilu przycisk nie jest na środku)
+- favicon/logo/domyślne profilowe
 
 - lepsza wyszukiwarka
 

@@ -12,6 +12,7 @@ from constants import *
 import math
 from helpers import *
 import base64
+import json
 
 
 def init_routes(app):
@@ -97,8 +98,10 @@ def init_routes(app):
     @app.route("/account_edit", methods=["GET"])
     def account_edit():
         account_data = get_my_account(request)
+        degree_courses = json.loads(get_subjects())
+        degree_courses = degree_courses.keys()
         response = jsonify(
-            render_template("account_edit.html", account_data=account_data)
+            render_template("account_edit.html", account_data=account_data, degree_courses=degree_courses)
         )
         # response.headers.add("Access-Control-Allow-Origin", "localhost:5000")
         # response.headers.add("Access-Control-Allow-Credentials", "true")

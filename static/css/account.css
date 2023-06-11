@@ -13,7 +13,7 @@
             align-items: center;
         }
         
-        .mycard-title {
+        .mycard-title { 
             overflow: hidden;
             max-height: 100%;
         }
@@ -124,7 +124,9 @@
         }
         
         .class_button {
-            margin: auto;
+           
+            margin-left: 85px;
+            margin-right: 25px;
             width: 80%;
             padding: 10px;
         }
@@ -133,3 +135,5 @@
             margin-left: -35px;
             margin-right: 32px;
         }
+
+      

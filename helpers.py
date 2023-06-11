@@ -101,4 +101,5 @@ def get_subjects_api() -> dict:
         result[s['degree_course']][s['subject']].append(s['semester'])
     print("read subjects from api")
 
+
     return result

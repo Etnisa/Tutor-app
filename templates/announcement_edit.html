@@ -3,8 +3,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Edytuj ogłoszenie</h5>
-                <button type="button" class="btn-close" id="enlarged-close" aria-label="Close"></button>
-                <span aria-hidden="true"></span>
+                <button type="button" class="btn-close" id="enlarged-close" aria-label="Close">
+                    <span aria-hidden="true"></span>
                 </button>
             </div>
             <div class="modal-body">
@@ -12,46 +12,56 @@
                 <form action="/edit_ann" method="post">
 
                     <!-- Hidden ID -->
-                    <input type="hidden" name="id" value="{{a['id']}}">
+                    <input type="hidden" name="id" value="{{ a['id'] }}">
 
                     <!-- TITLE -->
-                    <div class="ann-element" > <span>Tytuł: </span> <input type="text" name="title" id="ann_title" value="{{a['title']}}" placeholder="Brak danych">
+                    <div class="ann-element"><span>Tytuł: </span> <input type="text" name="title" id="ann_title"
+                                                                         value="{{ a['title'] }}"
+                                                                         placeholder="Brak danych">
                     </div>
 
-                        <!-- CONTENT -->
-                        <div class="ann-element"><span>Opis: </span>
-                        <textarea id="comment" name="content" rows="5" cols="50" placeholder="Brak danych">{{a['content']}}</textarea>
+                    <!-- CONTENT -->
+                    <div class="ann-element"><span>Opis: </span>
+                        <textarea id="comment" name="content" rows="5" cols="50"
+                                  placeholder="Brak danych">{{ a['content'] }}</textarea>
+                    </div>
+
+                    <!-- PRICE AND NEGOTIATION -->
+                    <div class="row ms-1">
+                        <div class="col-6 ann-element ">
+                            <span>Cena:</span>
+                            <input type="number" id="ann_price" name="price" value="{{ a['price'] }}"
+                                   placeholder="Brak danych">
                         </div>
 
-                            <!-- PRICE AND NEGOTIATION -->
-                    <div class="row ms-1">
-                            <div class="col-6 ann-element ">
-                                <span>Cena:</span>
-                                <input type="number" id="ann_price" name="price" value="{{a['price']}}" placeholder="Brak danych">
-                            </div>
+                        <!-- CHECKBOX -->
+                        <div class=" col-4 ann-element">
 
-                                    <!-- CHECKBOX -->
-                             <div class=" col-4 ann-element">
-
-                                <span>Do negocjacji?</span> {% if a['is_negotiable']%}
-                                <input type="checkbox" name="neg" id="ann_neg" checked> {% else %}
-                                <input type="checkbox" name="neg" id="ann_neg"> {% endif %}
-                            </div>
+                            <span>Do negocjacji?</span> {% if a['is_negotiable'] %}
+                            <input type="checkbox" name="neg" id="ann_neg" checked> {% else %}
+                            <input type="checkbox" name="neg" id="ann_neg"> {% endif %}
+                        </div>
                     </div>
 
                     <!-- DEGREE-COURSE -->
 
-                    <div class="ann-element"> <span>Kierunek: </span> <input type="text " id="ann_degree_course " name="degree_course" value="{{a[ 'degree_course']}} " placeholder="Brak danych "></div>
+                    <div class="ann-element"><span>Kierunek: </span>
+                        <select name="degree_course" id="edit_degree_course"></select>
+                    </div>
 
                     <!-- SUBJECT -->
-                    <div class="ann-element"><span>Przedmiot: </span><input type="text " id="ann_subject " name="subject" value="{{a[ 'subject']}} " placeholder="Brak danych "></div>
+                    <div class="ann-element"><span>Przedmiot: </span>
+                        <select name="subject" id="edit_subject"></select>
+                    </div>               
 
                     <!-- SEMESTER -->
-                    <div class="ann-element"> <span>Semestr: </span> <input type="number " id="ann_semester " name="semester" value="{{a[ 'semester']}} " placeholder="Brak danych "></div>
+                    <div class="ann-element"><span>Semestr: </span>
+                        <select name="semester" id="edit_semester"></select>
+                    </div>
 
                     <!-- BUTTON SUMBIT -->
                     <div class="ann-element ">
-                        <button type="submit"  class="btn btn-warning">Edytuj</button>
+                        <button type="submit" class="btn btn-warning">Edytuj</button>
                     </div>
                 </form>
 
@@ -59,3 +69,12 @@
         </div>
     </div>
 </div>
+
+<script id="edit_chained_select">
+    degree_courseSel = document.getElementById("edit_degree_course");
+    subjectSel = document.getElementById("edit_subject");
+    semesterSel = document.getElementById("edit_semester");
+    subjectObject =
+        {{ subjects|safe }}
+        selected = ["{{ a[ 'degree_course'] }}","{{ a[ 'subject'] }}", "{{ a[ 'semester'] }} "]
+</script>
