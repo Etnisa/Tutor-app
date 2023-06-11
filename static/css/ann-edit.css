@@ -2,7 +2,7 @@
     margin: 1rem;
     background-color: white;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -13,7 +13,7 @@ span {
 #annoucement_home_page_modal input {
     max-height: 2rem;
     margin-left: 2rem;
-    width: 20rem;
+    /* width: 20rem; */
 }
 
 textarea {
@@ -40,9 +40,27 @@ textarea {
     margin: 0rem;
 }
 
+#ann_title {
+    width: 100%;
+    text-overflow: ellipsis;
+}
 
-  
-  
+.modal-body>form:nth-child(1)>div:nth-child(4) {
+    display: flex;
+    justify-content: space-between;
+}
 
-  
-  
+#comment {
+    width: 100%;
+    /* height: 197px; */
+}
+
+#edit_btn_container {
+    display: flex;
+    justify-content: center;
+}
+
+.form-select {
+    width: 70%;
+    text-overflow: ellipsis;
+}
