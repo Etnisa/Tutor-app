@@ -11,13 +11,13 @@
                 <!-- tu był div z colem -->
                 <form action="/edit_ann" method="post">
 
-                    <!-- Hidden ID --> 
+                    <!-- Hidden ID -->
                     <input type="hidden" name="id" value="{{a['id']}}">
-                    
+
                     <!-- TITLE -->
                     <div class="ann-element" > <span>Tytuł: </span> <input type="text" name="title" id="ann_title" value="{{a['title']}}" placeholder="Brak danych">
                     </div>
-                    
+
                         <!-- CONTENT -->
                         <div class="ann-element"><span>Opis: </span>
                         <textarea id="comment" name="content" rows="5" cols="50" placeholder="Brak danych">{{a['content']}}</textarea>
@@ -40,15 +40,15 @@
                     </div>
 
                     <!-- DEGREE-COURSE -->
-                    
+
                     <div class="ann-element"> <span>Kierunek: </span> <input type="text " id="ann_degree_course " name="degree_course" value="{{a[ 'degree_course']}} " placeholder="Brak danych "></div>
-                    
+
                     <!-- SUBJECT -->
                     <div class="ann-element"><span>Przedmiot: </span><input type="text " id="ann_subject " name="subject" value="{{a[ 'subject']}} " placeholder="Brak danych "></div>
-                    
+
                     <!-- SEMESTER -->
                     <div class="ann-element"> <span>Semestr: </span> <input type="number " id="ann_semester " name="semester" value="{{a[ 'semester']}} " placeholder="Brak danych "></div>
-                    
+
                     <!-- BUTTON SUMBIT -->
                     <div class="ann-element ">
                         <button type="submit"  class="btn btn-warning">Edytuj</button>

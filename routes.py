@@ -128,18 +128,26 @@ def init_routes(app):
             f"https://chatty-bulldog-76.telebit.io/announcements/{id}"
         ).json()
         annoucement = annoucement[0]
-        response = jsonify(render_template("announcement_edit.html", a=annoucement))
+        response = jsonify(render_template("announcement_edit.html", a=annoucement, subjects=get_subjects()))
         response.headers.add("Access-Control-Allow-Origin", "*")
         return response
 
     @app.route("/add_ann_modal", methods=["GET"])
     def add_ann_modal():
-        response = jsonify(render_template("announcement_add.html"))
+        response = jsonify(render_template("announcement_add.html", subjects=get_subjects()))
         response.headers.add("Access-Control-Allow-Origin", "*")
         return response
 
     @app.route("/add_ann", methods=["POST"])
     def announcement_add():
+        # check if all form files are given
+        for key in ['title', 'comment', 'price', 'degree_course', 'subject', 'semester']:
+            if key not in request.form.keys() or request.form[key] == '':
+                flash("Błędne dane. Nie uzupełniono wszystkich pól formularza!")
+                resp = make_response(redirect(f"/account/{get_my_account(request)['username']}", 302))
+                return resp
+
+        # set is negotiable to True if checkbox is checked
         is_negotiable = False
         if 'neg' in request.form.keys() and request.form['neg'] == "on":
             is_negotiable = True
@@ -154,11 +162,11 @@ def init_routes(app):
                 "price": int(request.form['price']),
                 "is_negotiable": is_negotiable,
                 "degree_course": request.form['degree_course'],
-                "subject": request.form['subjec'],
+                "subject": request.form['subject'],
                 "semester": int(request.form['semester']),
             }
         )
-        # .json()
+
         if r.status_code == 200:
             resp = make_response(redirect(f"/account/{get_my_account(request)['username']}", 302))
 
@@ -166,7 +174,6 @@ def init_routes(app):
             # TODO flash error
             flash("Błędne dane")
             resp = make_response(redirect(f"/account/{get_my_account(request)['username']}", 302))
-            print("ACHTUNG GRANADE")
         return resp
 
     @app.route("/login_modal", methods=["GET"])

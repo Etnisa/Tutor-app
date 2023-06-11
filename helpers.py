@@ -1,10 +1,12 @@
+import json
+
 from flask import make_response, jsonify
 import requests
 from constants import *
 import base64
 
-
 avatar_cache = {}
+subjects_cache = None
 
 
 def forward_response(r):
@@ -71,11 +73,32 @@ def get_my_account(request):
 def get_avatar(username):
     if username in avatar_cache.keys():
         avatar = avatar_cache[username]
-        print(f"{username} avatar readed from cache")
+        print(f"{username} avatar read from cache")
     else:
         avatar = requests.get(f"https://chatty-bulldog-76.telebit.io/user/{username}/avatar").json()
         # default avatars are not cached
         if len(avatar_cache) < AVATAR_CACHE_SIZE and avatar is not None:
             avatar_cache[username] = avatar
-        print(f"{username} avatar readed from api")
+        print(f"{username} avatar read from api")
     return avatar
+
+
+def get_subjects():
+    global subjects_cache
+    if subjects_cache is None:
+        subjects_cache = get_subjects_api()
+    print("read subjects from cache")
+    return json.dumps(subjects_cache)
+
+
+def get_subjects_api() -> dict:
+    subjects = requests.get(f"https://chatty-bulldog-76.telebit.io/subjects").json()
+    result = {s['degree_course']: {} for s in subjects}
+    for s in subjects:
+        result[s['degree_course']][s['subject']] = []
+
+    for s in subjects:
+        result[s['degree_course']][s['subject']].append(s['semester'])
+    print("read subjects from api")
+
+    return result

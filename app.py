@@ -3,7 +3,6 @@ from routes import init_routes
 from flask_cors import CORS
 import logging
 
-
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 # app.config['SESSION_TYPE'] = 'filesystem'
