@@ -3,7 +3,6 @@
     (Z jakiegoś powodu przycisk zaloguj się działa prawidłowo)
 3) js wywala błędy po zalogoaniu się
 4) wylogowywuje po błędzie
-5) po kliknięciu edytuj(profil) nie pojawiają się elementy listy rozwijanej w dodawaniu ogłoszenia
 6) najpierw powinno się wybierać semestr, a potem przedmiot (chyba)
 7) puste pole w edycji ogłoszenia i dodawaniu ogłoszenia wywala "Internal Server Error" a powinno komunikat błędu
  (błędy są w kolejnej sesji)
