@@ -66,6 +66,9 @@ def init_routes(app):
     def account(user):
         announcements_list = get_user_annoucements(user)
         account_data = get_my_account(request)
+        if "username" not in account_data.keys():
+            account_data['username'] = "guest"        
+            
         profile = requests.get(f"{API}/user/{user}", cookies=request.cookies).json()
 
         # is it me
@@ -91,7 +94,9 @@ def init_routes(app):
             is_it_me=is_it_me,
             reviews=reviews,
             profile=profile,
-            avatar=avatar
+            avatar=avatar,
+            reviewers=[r['reviewer'] for r in reviews],
+            user=user
         )
 
     # @cross_origin()

@@ -136,4 +136,17 @@
             margin-right: 32px;
         }
 
-      
+      #review_content{
+        margin:0%;
+        width: 100%;
+      }
+      .review_container{
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 2%;
+      }
+      .review_container > div{
+            display:flex;
+            align-items: center;
+      }

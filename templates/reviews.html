@@ -10,20 +10,35 @@
 </div>
 
 {# add review #}
+<!-- account_data["username"]{{account_data["username"]}} -->
+{% if is_it_me == False and account_data["username"] not in reviewers %}
 <div>
+    
     <form action="/add_review" method="POST" class="container_comments mb-3" id="review_form">
-        <textarea rows="4" cols="50" name="review_content" id="review_content" form="review_form">
-            Wprowadź treść komentarza
-        </textarea>
-        <select name="rate" id="rate">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-        <input type="text" style="display: none" name="username" value="{{ profile['username'] }}">
-        <button type="submit" form="review_form">Prześlij opinie</button>
 
+        <textarea rows="4" cols="50" placeholder="Wprowadź treść komentarza" name="review_content" id="review_content" form="review_form" class="form-control" ></textarea>
+        <div class="review_container">
+            <div>
+            <span  >Ocena: </span>
+             
+          
+            <select name="rate" id="rate" class="form-select" style = "margin-left:10px">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            </div>
+       
+                <input type="text" style="display: none" name="username" value="{{ profile['username'] }}">
+                {% if account_data["username"] == "guest"%}
+                <button type="button" disabled class="btn btn-warning">Zaloguj się aby przesłać opinie</button>
+                {% else %}
+                <button type="submit" class="btn btn-warning" form="review_form">Prześlij opinie</button>
+                {% endif %}
+                             
+        </div>
     </form>
 </div>
+{% endif %}
