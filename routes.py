@@ -59,14 +59,14 @@ def init_routes(app):
 
     @app.route("/announcements", methods=["GET"])
     def announcements():
-        return get_annocements()
+        return get_annocements(params='?price_sort=asc')
 
     # @cross_origin()
     @app.route("/account/<user>", methods=["GET", "POST"])
     def account(user):
         announcements_list = get_user_annoucements(user)
         account_data = get_my_account(request)
-        profile = requests.get(f"https://chatty-bulldog-76.telebit.io/user/{user}", cookies=request.cookies).json()
+        profile = requests.get(f"{API}/user/{user}", cookies=request.cookies).json()
 
         # is it me
         is_it_me = False
@@ -112,7 +112,7 @@ def init_routes(app):
     @app.route("/announcement/<int:id>", methods=["GET"])
     def announcement(id):
         annoucement = requests.get(
-            f"https://chatty-bulldog-76.telebit.io/announcements/{id}"
+            f"{API}/announcements/{id}"
         ).json()
         annoucement = annoucement[0]
 
@@ -128,7 +128,7 @@ def init_routes(app):
     @app.route("/announcement_edit/<int:id>", methods=["GET"])
     def announcement_edit(id):
         annoucement = requests.get(
-            f"https://chatty-bulldog-76.telebit.io/announcements/{id}"
+            f"{API}/announcements/{id}"
         ).json()
         annoucement = annoucement[0]
         response = jsonify(render_template("announcement_edit.html", a=annoucement, subjects=get_subjects()))
@@ -156,7 +156,7 @@ def init_routes(app):
             is_negotiable = True
 
         r = requests.post(
-            f"https://chatty-bulldog-76.telebit.io/announcements",
+            f"{API}/announcements",
             cookies=request.cookies,
             headers={"Content-Type": "application/json"},
             json={
@@ -194,7 +194,7 @@ def init_routes(app):
     @app.route("/login", methods=["POST"])
     def login():
         r = requests.post(
-            "https://chatty-bulldog-76.telebit.io/login",
+            f"{API}/login",
             headers={"Content-Type": "application/json"},
             json={
                 "user": request.form["username"],
@@ -223,7 +223,7 @@ def init_routes(app):
     @app.route("/register", methods=["POST"])
     def register():
         r = requests.post(
-            "https://chatty-bulldog-76.telebit.io/sign_up",
+            f"{API}/sign_up",
             headers={"Content-Type": "application/json"},
             json={
                 "username": request.form['username'],
@@ -238,7 +238,7 @@ def init_routes(app):
 
     @app.route("/logout", methods=["GET"])
     def logout():
-        r = requests.get("https://chatty-bulldog-76.telebit.io/logout")
+        r = requests.get(f"{API}/logout")
         resp = make_response(redirect("/", 302))
         resp.set_cookie("session", "", expires=0)
         return resp
@@ -246,7 +246,7 @@ def init_routes(app):
     @app.route("/edit_acc", methods=["POST"])
     def edit_acc():
         r = requests.put(
-            "https://chatty-bulldog-76.telebit.io/my_account",
+            f"{API}/my_account",
             cookies=request.cookies,
             headers={"Content-Type": "application/json"},
             json={
@@ -272,7 +272,7 @@ def init_routes(app):
         # file
         if request.files['file'].filename:
             r = requests.put(
-                "https://chatty-bulldog-76.telebit.io/my_account/avatar",
+                f"{API}/my_account/avatar",
                 cookies=request.cookies,
                 files=request.files
             )
@@ -300,7 +300,7 @@ def init_routes(app):
             is_negotiable = True
 
         r = requests.put(
-            f"https://chatty-bulldog-76.telebit.io/announcements/{id}",
+            f"{API}/announcements/{id}",
             cookies=request.cookies,
             headers={"Content-Type": "application/json"},
             json={
@@ -327,7 +327,7 @@ def init_routes(app):
     def del_edit(id):
         print(request.cookies.get('session'))
         r = requests.delete(
-            f"https://chatty-bulldog-76.telebit.io/announcements/{id}",
+            f"{API}/announcements/{id}",
             cookies=request.cookies
         )
         # if r.status_code == 200:

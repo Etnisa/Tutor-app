@@ -17,9 +17,9 @@ def forward_response(r):
     return resp
 
 
-def get_annocements():
+def get_annocements(params=''):
     announcements = requests.get(
-        "https://chatty-bulldog-76.telebit.io/announcements"
+        f"{API}/announcements{params}"
     ).json()
 
     # cut title
@@ -34,7 +34,7 @@ def get_annocements():
 def filter_annoucements(search_for):
     search_for = search_for.lower()
     search_for = search_for.split()
-    annocements = get_annocements()
+    annocements = get_annocements(params='?price_sort=asc')
     if len(search_for) == 0:
         return annocements
     filtered = []
@@ -65,7 +65,7 @@ def get_user_annoucements(user):
 
 def get_my_account(request):
     r = requests.get(
-        "https://chatty-bulldog-76.telebit.io/my_account", cookies=request.cookies
+        f"{API}/my_account", cookies=request.cookies
     )
     return r.json()
 
@@ -75,7 +75,7 @@ def get_avatar(username):
         avatar = avatar_cache[username]
         print(f"{username} avatar read from cache")
     else:
-        avatar = requests.get(f"https://chatty-bulldog-76.telebit.io/user/{username}/avatar").json()
+        avatar = requests.get(f"{API}/user/{username}/avatar").json()
         # default avatars are not cached
         if len(avatar_cache) < AVATAR_CACHE_SIZE and avatar is not None:
             avatar_cache[username] = avatar
@@ -92,7 +92,7 @@ def get_subjects():
 
 
 def get_subjects_api() -> dict:
-    subjects = requests.get(f"https://chatty-bulldog-76.telebit.io/subjects").json()
+    subjects = requests.get(f"{API}/subjects").json()
     result = {s['degree_course']: {} for s in subjects}
     for s in subjects:
         result[s['degree_course']][s['subject']] = []
@@ -100,6 +100,5 @@ def get_subjects_api() -> dict:
     for s in subjects:
         result[s['degree_course']][s['subject']].append(s['semester'])
     print("read subjects from api")
-
 
     return result
