@@ -1,10 +1,29 @@
 <div>
     {% for r in reviews %}
-    <div class="container_comments mb-3">
-        <span style="font-size: 12px">{{ r['date'] }}</span><br>
-        <span>{{ r['review'] }}</span><br>
-        <span id="komentarz"><i>{{ r['reviewer'] }}</i></span><br>
-        <span id="komentarz_linia_pod">Ocena: {{ r['rate'] }}/5</span>
-    </div>
+        <div class="container_comments mb-3">
+            <span style="font-size: 12px">{{ r['date'] }}</span><br>
+            <span>{{ r['review'] }}</span><br>
+            <span id="komentarz"><i>{{ r['reviewer'] }}</i></span><br>
+            <span id="komentarz_linia_pod">Ocena: {{ r['rate'] }}/5</span>
+        </div>
     {% endfor %}
+</div>
+
+{# add review #}
+<div>
+    <form action="/add_review" method="POST" class="container_comments mb-3" id="review_form">
+        <textarea rows="4" cols="50" name="review_content" id="review_content" form="review_form">
+            Wprowadź treść komentarza
+        </textarea>
+        <select name="rate" id="rate">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <input type="text" style="display: none" name="username" value="{{ profile['username'] }}">
+        <button type="submit" form="review_form">Prześlij opinie</button>
+
+    </form>
 </div>

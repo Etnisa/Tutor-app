@@ -339,3 +339,25 @@ def init_routes(app):
         #     resp = make_response(redirect(f"/account/{get_my_account(request)['username']}", 302))
         # return resp
         return ""
+
+    @app.route("/add_review", methods=["POST"])
+    def add_review():
+        username = request.form.get('username')
+        r = requests.post(
+            f"{API}/user/{username}/review",
+            cookies=request.cookies,
+            headers={"Content-Type": "application/json"},
+            json={
+                "rate": int(request.form.get('rate')),
+                "review": request.form.get('review_content')
+            }
+        )
+
+        if r.status_code == 200:
+            resp = make_response(redirect(f"/account/{username}", 302))
+
+        else:
+            # TODO flash error
+            flash("Błędne dane")
+            resp = make_response(redirect(f"/account/{get_my_account(request)['username']}", 302))
+        return resp
