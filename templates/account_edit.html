@@ -31,13 +31,13 @@
                             <div class="form-outline mb-1">
                                 <span>Kierunek: </span>
                                 <select name="degree_course" id="degree_course">
-                                {% for dgc in degree_courses %}
-                                    {% if dgc ==  account_data['degree_course']%}
-                                        <option value="{{ account_data['degree_course'] }}" selected="selected">{{ dgc }}</option>
-                                    {% else %}
-                                        <option value="{{ account_data['degree_course'] }}">{{ dgc }}</option>
-                                    {% endif %}
-                                {% endfor %}  
+                                    {% for dgc in degree_courses %}
+                                        {% if dgc ==  account_data['degree_course'] %}
+                                            <option value="{{ dgc }}" selected="selected">{{ dgc }}</option>
+                                        {% else %}
+                                            <option value="{{ dgc }}">{{ dgc }}</option>
+                                        {% endif %}
+                                    {% endfor %}
                                 </select>
                             </div>
 
@@ -46,13 +46,13 @@
                             <div class="form-outline mb-1">
                                 <span>Semestr:</span>
                                 <select name="semester" id="semester">
-                                {% for semester in range(1,8) %}
-                                    {% if semester ==  account_data['semester']%}
-                                        <option value="{{ semester }}" selected="selected">{{ semester }}</option>
-                                    {% else %}
-                                        <option value="{{ semester }}">{{ semester }}</option>
-                                    {% endif %}
-                                {% endfor %}  
+                                    {% for semester in range(1,8) %}
+                                        {% if semester ==  account_data['semester'] %}
+                                            <option value="{{ semester }}" selected="selected">{{ semester }}</option>
+                                        {% else %}
+                                            <option value="{{ semester }}">{{ semester }}</option>
+                                        {% endif %}
+                                    {% endfor %}
                                 </select>
                             </div>
 
@@ -89,11 +89,11 @@
 
                             <!-- TO JEST PRZYCISK ZMIEN DANE W FORMULARZU  -->
                             <div class="class_button">
-                                
+
                                 <button type="submit" class="btn btn-warning btn_edit_date" id="edit-acc-btn">Zmień
                                     dane
                                 </button>
-                            
+
                             </div>
                         </div>
                     </form>
