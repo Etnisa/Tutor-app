@@ -49,14 +49,14 @@
                         <select name="degree_course" id="edit_degree_course"></select>
                     </div>
 
-                    <!-- SUBJECT -->
-                    <div class="ann-element"><span>Przedmiot: </span>
-                        <select name="subject" id="edit_subject"></select>
-                    </div>               
-
                     <!-- SEMESTER -->
                     <div class="ann-element"><span>Semestr: </span>
                         <select name="semester" id="edit_semester"></select>
+                    </div>
+
+                    <!-- SUBJECT -->
+                    <div class="ann-element"><span>Przedmiot: </span>
+                        <select name="subject" id="edit_subject"></select>
                     </div>
 
                     <!-- BUTTON SUMBIT -->
@@ -76,5 +76,5 @@
     semesterSel = document.getElementById("edit_semester");
     subjectObject =
         {{ subjects|safe }}
-        selected = ["{{ a[ 'degree_course'] }}","{{ a[ 'subject'] }}", "{{ a[ 'semester'] }} "]
+        selected = ["{{ a[ 'degree_course'] }}", "{{ a[ 'semester'] }}", "{{ a[ 'subject'] }} "]
 </script>

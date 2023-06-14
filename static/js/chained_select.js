@@ -1,5 +1,5 @@
-function slice_subject(subject, max_len){
-    if (subject.length > max_len){
+function slice_subject(subject, max_len) {
+    if (subject.length > max_len) {
         subject = subject.slice(0, max_len)
         subject = subject + '...'
     }
@@ -17,31 +17,31 @@ function chained_select(selected = null) {
 
     degree_courseSel.onchange = function () {
         //empty Chapters- and Topics- dropdowns
-        semesterSel.length = 1;
         subjectSel.length = 1;
+        semesterSel.length = 1;
         //display correct values
         for (let y in subjectObject[this.value]) {
-            subjectSel.options[subjectSel.options.length] = new Option(slice_subject(y, 44), y);
+            semesterSel.options[semesterSel.options.length] = new Option(y, y);
         }
     }
-    subjectSel.onchange = function () {
+    semesterSel.onchange = function () {
         //empty Chapters dropdown
-        semesterSel.length = 1;
+        subjectSel.length = 1;
         //display correct values
         let z = subjectObject[degree_courseSel.value][this.value];
         for (let i = 0; i < z.length; i++) {
-            semesterSel.options[semesterSel.options.length] = new Option(z[i], z[i]);
+            subjectSel.options[subjectSel.options.length] = new Option(slice_subject(z[i], 45), z[i]);
         }
     }
 
-    
+
     if (selected != null) {
         const event = new Event('change');
         degree_courseSel.value = selected[0]
         degree_courseSel.dispatchEvent(event)
-        subjectSel.value = selected[1]
-        subjectSel.dispatchEvent(event)
-        semesterSel.value = selected[2].trim()
+        semesterSel.value = selected[1]
+        semesterSel.dispatchEvent(event)
+        subjectSel.value = selected[2].trim()
     }
 
 }

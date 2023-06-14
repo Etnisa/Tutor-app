@@ -93,12 +93,11 @@ def get_subjects():
 
 def get_subjects_api() -> dict:
     subjects = requests.get(f"{API}/subjects").json()
-    result = {s['degree_course']: {} for s in subjects}
-    for s in subjects:
-        result[s['degree_course']][s['subject']] = []
+    result = {s['degree_course']: {1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: []} for s in subjects}
 
     for s in subjects:
-        result[s['degree_course']][s['subject']].append(s['semester'])
+        if int(s['semester']) < 8:  # temp solution
+            result[s['degree_course']][int(s['semester'])].append(s['subject'])
     print("read subjects from api")
 
     return result
