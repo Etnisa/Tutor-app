@@ -1,27 +1,28 @@
 <nav class="navbar navbar-fluid navbar-light menu" style="background-color:#3995ff">
     <!-- logo -->
-    
-        <a class="navbar-brand ms-4" href="/1"> Tutor-app</a> 
-   
+
+    <a class="navbar-brand ms-4" href="/1"> Tutor-app</a>
+
     <!-- add annoucement -->
     {% if 'username' in account_data.keys() %}
-    <div class="zaloguj">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+        <div class="zaloguj">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
 
-                <a class="nav-link" id="add_ann_btn" href="#">
-            Dodaj ogłoszenie
-        </a>
-            </li>
-        </ul>
-    </div>
+                    <a class="nav-link" id="add_ann_btn" href="#">
+                        Dodaj ogłoszenie
+                    </a>
+                </li>
+            </ul>
+        </div>
     {% endif %}
 
     <!-- search bar -->
     <form action="/1" , method="post">
         <div class="row ms-2">
             <div class="col-8">
-                <input class="form-control pole_szukania" name="filter" type="search" placeholder="Szukaj" aria-label="Search">
+                <input class="form-control pole_szukania" name="filter" type="search" placeholder="Szukaj"
+                       aria-label="Search">
             </div>
 
             <div class="col-4">
@@ -32,16 +33,16 @@
 
     <!-- user name, surname -->
     {% if 'username' in account_data.keys() %}
-    <div class="zaloguj ms-4">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+        <div class="zaloguj ms-4">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
 
-                <a class="nav-link" id="profil-button" href="/account/{{account_data['username']}}">
-                    {{ account_data['name']|capitalize }} {{ account_data['surname']|capitalize }}
-                </a>
-            </li>
-        </ul>
-    </div>
+                    <a class="nav-link" id="profil-button" href="/account/{{ account_data['username'] }}">
+                        {{ account_data['name']|capitalize }} {{ account_data['surname']|capitalize }}
+                    </a>
+                </li>
+            </ul>
+        </div>
     {% endif %}
 
 
@@ -50,13 +51,13 @@
     <div class="zaloguj ms-3">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                {% if 'username' in account_data.keys() %}
-                <a class="nav-link" id="logout-button" href="/logout">
-                    Wyloguj się
-                </a> {% else %}
-                <a class="nav-link" id="login-button" href="#">
-                    Zaloguj się
-                </a> {% endif %}
+                {% if 'username' in account_data.keys() and account_data['username'] != 'guest' %}
+                    <a class="nav-link" id="logout-button" href="/logout">
+                        Wyloguj się
+                    </a> {% else %}
+                    <a class="nav-link" id="login-button" href="#">
+                        Zaloguj się
+                    </a> {% endif %}
             </li>
         </ul>
     </div>
@@ -65,8 +66,8 @@
 
 <!-- flashed messages -->
 {% for message in get_flashed_messages() %}
-<div class="alert alert-danger" role="alert">
-    {{ message }}
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
     </div>
 {% endfor %}
 
