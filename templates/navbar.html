@@ -8,10 +8,11 @@
         <div class="zaloguj">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-
-                    <a class="nav-link" id="add_ann_btn" href="#">
-                        Dodaj ogłoszenie
-                    </a>
+                    {% if account_data['username'] != 'guest' %}
+                        <a class="nav-link" id="add_ann_btn" href="#">
+                            Dodaj ogłoszenie
+                        </a>
+                    {% endif %}
                 </li>
             </ul>
         </div>
