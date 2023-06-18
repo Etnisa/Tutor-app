@@ -9,7 +9,7 @@ Array.from(enl).forEach(element => {
 function enlarge_ann(e) {
     id = e.target.closest('a').id
 
-    fetch(`http://127.0.0.1:5000/announcement_edit/${id}`)
+    fetch(`/announcement_edit/${id}`)
         .then(res => res.json())
         .then(data => {
             // console.log(data)
@@ -35,7 +35,7 @@ function enlarge_ann(e) {
 if (edit_profil != null) edit_profil.addEventListener('click', account_edit)
 
 function account_edit(e) {
-    fetch(`http://127.0.0.1:5000/account_edit`, {'credentials': 'include'})
+    fetch(`/account_edit`, {'credentials': 'include'})
         .then(res => res.json())
         .then(data => {
             console.log(data)

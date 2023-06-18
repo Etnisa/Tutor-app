@@ -9,7 +9,7 @@ let register_modal
 let login_button2 // btn to swich from register modal to login modal
 
 function login_process(e, err = '') {
-    fetch('http://127.0.0.1:5000/login_modal')
+    fetch('/login_modal')
         .then(res => res.json())
         .then(data => {
 
@@ -34,7 +34,7 @@ function login_process(e, err = '') {
 }
 
 function register_process() {
-    fetch('http://127.0.0.1:5000/register_modal')
+    fetch('/register_modal')
         .then(res => res.json())
         .then(data => {
 
