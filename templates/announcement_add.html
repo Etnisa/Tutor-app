@@ -1,4 +1,4 @@
-<div class=" modal" id="ann_add_modal" tabindex="-1" role="dialog">
+<div class="modal" id="ann_add_modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <!-- tu był div z colem -->
-                <form action="/add_ann" method="post">
+                <form action="/add_ann" style="width: 100%" method="post">
 
                     <!-- TITLE -->
                     <div class="ann-element"><span>Tytuł:&nbsp;</span> <input type="text" name="title" id="ann_title"
@@ -18,7 +18,8 @@
                     <!-- CONTENT -->
 
                     <div class="ann-element"><span>Opis: </span>
-                        <textarea id="comment" name="comment" rows="5" cols="50" placeholder="Brak danych"
+                        <textarea class="form-control" id="comment" name="comment" rows="5" cols="50"
+                                  placeholder="Brak danych"
                                   required></textarea>
                     </div>
 
